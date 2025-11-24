@@ -1,16 +1,19 @@
+# Import the Streamlit library - this is what creates the web interface
 import streamlit as st
 
 # ==================== RESTAURANT DATABASE ====================
+# This is our main data source - a list of dictionaries containing restaurant information
+# Each restaurant is a dictionary with details like name, cuisine, price, etc.
 RESTAURANTS = [
     {
-        "name": "Restoran Nasi Kandar Simpang Empat",
-        "cuisine": "malay",
-        "type": ["nasi kandar", "rice"],
-        "price": "budget",
-        "location": "Bandar Seri Iskandar",
-        "rating": 4.2,
-        "hours": "24 hours",
-        "description": "Popular nasi kandar spot with variety of curries and dishes."
+        "name": "Restoran Nasi Kandar Simpang Empat",  # Restaurant name
+        "cuisine": "malay",  # Type of cuisine (used for filtering)
+        "type": ["nasi kandar", "rice"],  # Food types offered (can match multiple keywords)
+        "price": "budget",  # Price range: budget, moderate, or expensive
+        "location": "Bandar Seri Iskandar",  # Where the restaurant is located
+        "rating": 4.2,  # Rating out of 5 stars
+        "hours": "24 hours",  # Operating hours
+        "description": "Popular nasi kandar spot with variety of curries and dishes."  # Brief description
     },
     {
         "name": "Kedai Makan Pak Tam",
@@ -105,86 +108,146 @@ RESTAURANTS = [
 ]
 
 # ==================== KEYWORD MAPPINGS ====================
+# These dictionaries map user words to our categories
+# This is the "AI brain" - it understands what users mean when they type different words
+
+# Maps various ways users might say cuisine types to our standard categories
 CUISINE_KEYWORDS = {
-    "malay": ["malay", "melayu", "local", "kampung", "traditional"],
-    "chinese": ["chinese", "cina", "oriental"],
-    "indian": ["indian", "mamak", "india"],
-    "western": ["western", "cafe", "pasta", "burger"],
-    "arab": ["arab", "middle eastern", "nasi arab"]
+    "malay": ["malay", "melayu", "local", "kampung", "traditional"],  # If user types any of these words, we know they want Malay food
+    "chinese": ["chinese", "cina", "oriental"],  # Chinese food keywords
+    "indian": ["indian", "mamak", "india"],  # Indian food keywords
+    "western": ["western", "cafe", "pasta", "burger"],  # Western food keywords
+    "arab": ["arab", "middle eastern", "nasi arab"]  # Arab food keywords
 }
 
+# Maps various ways users might describe their budget to our price categories
 PRICE_KEYWORDS = {
-    "budget": ["cheap", "budget", "murah", "affordable", "low price"],
-    "moderate": ["moderate", "medium", "sederhana", "reasonable"],
-    "expensive": ["expensive", "mahal", "fancy", "high end", "premium"]
+    "budget": ["cheap", "budget", "murah", "affordable", "low price"],  # Budget-friendly keywords
+    "moderate": ["moderate", "medium", "sederhana", "reasonable"],  # Mid-range keywords
+    "expensive": ["expensive", "mahal", "fancy", "high end", "premium"]  # Expensive keywords
 }
 
+# Maps food types users might search for
 FOOD_TYPE_KEYWORDS = {
-    "rice": ["rice", "nasi", "nasi campur", "nasi kandar"],
-    "seafood": ["seafood", "fish", "prawn", "sotong", "ikan"],
-    "breakfast": ["breakfast", "sarapan", "morning", "roti canai"],
-    "coffee": ["coffee", "kopi", "cafe", "latte"],
-    "chicken rice": ["chicken rice", "nasi ayam"],
-    "roti canai": ["roti canai", "roti", "canai"],
-    "nasi kandar": ["nasi kandar", "kandar"]
+    "rice": ["rice", "nasi", "nasi campur", "nasi kandar"],  # Rice-based dishes
+    "seafood": ["seafood", "fish", "prawn", "sotong", "ikan"],  # Seafood keywords
+    "breakfast": ["breakfast", "sarapan", "morning", "roti canai"],  # Breakfast keywords
+    "coffee": ["coffee", "kopi", "cafe", "latte"],  # Coffee/cafe keywords
+    "chicken rice": ["chicken rice", "nasi ayam"],  # Chicken rice specific
+    "roti canai": ["roti canai", "roti", "canai"],  # Roti canai specific
+    "nasi kandar": ["nasi kandar", "kandar"]  # Nasi kandar specific
 }
 
 # ==================== AI FUNCTIONS ====================
+# These are the core functions that make the chatbot "intelligent"
+
 def extract_preferences(message):
-    """Extract user preferences from their message."""
-    msg_lower = message.lower()
+    """
+    Extract user preferences from their message.
+    This function analyzes what the user typed and figures out what they want.
+    
+    Parameters:
+        message (str): The text message from the user
+        
+    Returns:
+        dict: A dictionary containing extracted preferences (cuisine, price, food_type, late_night)
+    """
+    msg_lower = message.lower()  # Convert message to lowercase for easier matching
+    
+    # Initialize empty preferences dictionary
     prefs = {"cuisine": None, "price": None, "food_type": None, "late_night": False}
     
+    # Check if user mentioned a cuisine type
+    # Loop through each cuisine category and its keywords
     for cuisine, keywords in CUISINE_KEYWORDS.items():
+        # Check if any keyword appears in the user's message
         if any(kw in msg_lower for kw in keywords):
-            prefs["cuisine"] = cuisine
-            break
+            prefs["cuisine"] = cuisine  # Save the cuisine preference
+            break  # Stop after finding first match
     
+    # Check if user mentioned a price preference
     for price, keywords in PRICE_KEYWORDS.items():
         if any(kw in msg_lower for kw in keywords):
-            prefs["price"] = price
+            prefs["price"] = price  # Save the price preference
             break
     
+    # Check if user mentioned a specific food type
     for food, keywords in FOOD_TYPE_KEYWORDS.items():
         if any(kw in msg_lower for kw in keywords):
-            prefs["food_type"] = food
+            prefs["food_type"] = food  # Save the food type preference
             break
     
+    # Check if user wants late-night options
+    # Look for words related to late night or 24-hour service
     if any(word in msg_lower for word in ["late", "night", "midnight", "24", "malam", "lewat"]):
         prefs["late_night"] = True
     
-    return prefs
+    return prefs  # Return the extracted preferences
 
 def find_restaurants(preferences):
-    """Find restaurants matching user preferences."""
-    matches = []
+    """
+    Find restaurants matching user preferences using a scoring system.
+    Each restaurant gets points based on how well it matches user preferences.
     
-    for restaurant in RESTAURANTS:
-        score = 0
+    Parameters:
+        preferences (dict): Dictionary of user preferences from extract_preferences()
         
+    Returns:
+        list: List of up to 5 matching restaurants, sorted by relevance
+    """
+    matches = []  # List to store (restaurant, score) tuples
+    
+    # Loop through each restaurant in our database
+    for restaurant in RESTAURANTS:
+        score = 0  # Initialize score for this restaurant
+        
+        # Give 3 points if cuisine matches
         if preferences["cuisine"] and restaurant["cuisine"] == preferences["cuisine"]:
             score += 3
         
+        # Give 2 points if price range matches
         if preferences["price"] and restaurant["price"] == preferences["price"]:
             score += 2
         
+        # Give 2 points if the restaurant serves the requested food type
         if preferences["food_type"]:
+            # Check if food_type appears in any of the restaurant's type list
             if any(preferences["food_type"] in t for t in restaurant["type"]):
                 score += 2
         
+        # Give 2 points if restaurant is open 24 hours and user wants late-night food
         if preferences["late_night"] and "24" in restaurant["hours"]:
             score += 2
         
+        # Add restaurant to matches if it has any score OR if user didn't specify preferences
         if score > 0 or not any(preferences.values()):
-            matches.append((restaurant, score))
+            matches.append((restaurant, score))  # Store restaurant with its score
     
+    # Sort matches by score (highest first), then by rating (highest first)
     matches.sort(key=lambda x: (x[1], x[0]["rating"]), reverse=True)
+    
+    # Return only the restaurants (not scores), limited to top 5
     return [m[0] for m in matches[:5]]
 
 def format_restaurant(r):
-    """Format restaurant info for display."""
+    """
+    Format restaurant information into nice-looking HTML for display.
+    This creates the restaurant "card" that users see.
+    
+    Parameters:
+        r (dict): A restaurant dictionary
+        
+    Returns:
+        str: HTML-formatted string for displaying the restaurant
+    """
+    # Dictionary mapping price categories to emoji symbols
     price_emoji = {"budget": "💰", "moderate": "💰💰", "expensive": "💰💰💰"}
+    
+    # Create star rating visualization (e.g., 4.2 becomes ⭐⭐⭐⭐)
     stars = "⭐" * int(r['rating'])
+    
+    # Return formatted HTML string with restaurant details
+    # The <div class="restaurant-card"> uses CSS styling defined later
     return f"""
 <div class="restaurant-card">
     <h4>{r['name']}</h4>
@@ -198,11 +261,22 @@ def format_restaurant(r):
 """
 
 def generate_response(user_message):
-    """Generate chatbot response based on user message."""
-    msg_lower = user_message.lower()
+    """
+    Generate the chatbot's response based on what the user typed.
+    This is the main "brain" function that decides what to say.
     
+    Parameters:
+        user_message (str): The message typed by the user
+        
+    Returns:
+        str: The chatbot's response text
+    """
+    msg_lower = user_message.lower()  # Convert to lowercase for easier checking
+    
+    # Check if user is greeting the bot
     greetings = ["hi", "hello", "hey", "assalamualaikum", "hai"]
     if any(g in msg_lower for g in greetings):
+        # Return welcome message with instructions
         return """Hello! 👋 Welcome to the Seri Iskandar Restaurant Recommender!
 
 I can help you find great places to eat. Just tell me:
@@ -214,7 +288,9 @@ I can help you find great places to eat. Just tell me:
 For example: "I want cheap Malay food" or "Any good cafe nearby?"
 """
 
+    # Check if user is asking for help
     if any(h in msg_lower for h in ["help", "how", "what can"]):
+        # Return help instructions
         return """Here's how I can help you:
 
 🍜 **Find by cuisine**: "Show me Chinese restaurants"
@@ -226,31 +302,40 @@ For example: "I want cheap Malay food" or "Any good cafe nearby?"
 Just ask naturally and I'll recommend the best spots!
 """
 
-    prefs = extract_preferences(user_message)
-    restaurants = find_restaurants(prefs)
+    # If not greeting or help, treat as a restaurant search query
+    prefs = extract_preferences(user_message)  # Extract what user wants
+    restaurants = find_restaurants(prefs)  # Find matching restaurants
     
+    # If no restaurants found, apologize
     if not restaurants:
         return "Sorry, I couldn't find any restaurants matching your criteria. Try being less specific or ask for different options!"
     
+    # Build response with restaurant recommendations
     response = "### 🍴 Here are my recommendations:\n\n"
-    for r in restaurants[:3]:
-        response += format_restaurant(r)
     
+    # Show top 3 restaurants
+    for r in restaurants[:3]:
+        response += format_restaurant(r)  # Add formatted restaurant card
+    
+    # If more than 3 matches, tell user there are more options
     if len(restaurants) > 3:
         response += f"\n\n_I found {len(restaurants)} matches. Want to see more options?_"
     
     return response
 
 # ==================== STREAMLIT UI ====================
+# This section creates the actual website interface
 
+# Configure the page settings
 st.set_page_config(
-    page_title="Seri Iskandar Food Bot", 
-    page_icon="🍽️",
-    layout="centered",
-    initial_sidebar_state="expanded"
+    page_title="Seri Iskandar Food Bot",  # Browser tab title
+    page_icon="🍽️",  # Browser tab icon
+    layout="centered",  # Center the content (alternative: "wide")
+    initial_sidebar_state="expanded"  # Show sidebar by default
 )
 
-# PWA Support
+# PWA Support - Makes the website installable as a mobile app
+# This adds metadata that browsers use to enable "Add to Home Screen"
 st.markdown("""
 <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlNlcmkgSXNrYW5kYXIgUmVzdGF1cmFudCBCb3QiLAogICJzaG9ydF9uYW1lIjogIkZvb2QgQm90IiwKICAiZGVzY3JpcHRpb24iOiAiQUkgUmVzdGF1cmFudCBSZWNvbW1lbmRlciBmb3IgU2VyaSBJc2thbmRhciIsCiAgInN0YXJ0X3VybCI6ICIvIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjMWExYTJlIiwKICAidGhlbWVfY29sb3IiOiAiI2U5NDU2MCIsCiAgIm9yaWVudGF0aW9uIjogInBvcnRyYWl0IiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiaHR0cHM6Ly9pbWcuaWNvbnM4LmNvbS9jbG91ZHMvMTkyL3Jlc3RhdXJhbnQucG5nIiwKICAgICAgInNpemVzIjogIjE5MngxOTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciCiAgICB9LAogICAgewogICAgICAic3JjIjogImh0dHBzOi8vaW1nLmljb25zOC5jb20vY2xvdWRzLzUxMi9yZXN0YXVyYW50LnBuZyIsCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfQogIF0KfQ==">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -261,86 +346,106 @@ st.markdown("""
 <link rel="apple-touch-icon" href="https://img.icons8.com/clouds/192/restaurant.png">
 """, unsafe_allow_html=True)
 
-# Custom CSS Styling
+# Custom CSS Styling - This controls how everything looks
+# CSS (Cascading Style Sheets) defines colors, sizes, fonts, etc.
 st.markdown("""
 <style>
+    /* Main app background - gradient from dark blue to darker blue */
     .stApp {
         background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
     }
     
+    /* Main title (h1) styling */
     h1 {
-        color: #e94560 !important;
-        text-align: center;
-        font-size: 2.5rem !important;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        color: #e94560 !important;  /* Pink/red color */
+        text-align: center;  /* Center the text */
+        font-size: 2.5rem !important;  /* Large text size */
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);  /* Subtle shadow effect */
     }
     
+    /* Subtitle/caption styling */
     .stCaption {
         text-align: center;
-        color: #a2d2ff !important;
+        color: #a2d2ff !important;  /* Light blue color */
         font-size: 1.1rem !important;
     }
     
+    /* Chat message bubbles */
     .stChatMessage {
-        background-color: rgba(255,255,255,0.05);
-        border-radius: 15px;
+        background-color: rgba(255,255,255,0.05);  /* Slightly transparent white */
+        border-radius: 15px;  /* Rounded corners */
         padding: 10px;
         margin: 5px 0;
     }
     
+    /* Restaurant information cards */
     .restaurant-card {
-        background: linear-gradient(145deg, #0f3460, #16213e);
-        border-radius: 15px;
-        padding: 20px;
-        margin: 15px 0;
-        border-left: 4px solid #e94560;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        background: linear-gradient(145deg, #0f3460, #16213e);  /* Gradient background */
+        border-radius: 15px;  /* Rounded corners */
+        padding: 20px;  /* Space inside the card */
+        margin: 15px 0;  /* Space between cards */
+        border-left: 4px solid #e94560;  /* Pink left border as accent */
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);  /* Shadow for depth */
     }
     
+    /* Restaurant card title */
     .restaurant-card h4 {
-        color: #e94560;
+        color: #e94560;  /* Pink color */
         margin-bottom: 10px;
         font-size: 1.2rem;
     }
     
+    /* Restaurant card text */
     .restaurant-card p {
-        color: #eaeaea;
+        color: #eaeaea;  /* Light gray color for readability */
         margin: 5px 0;
     }
     
+    /* Sidebar background */
     section[data-testid="stSidebar"] {
         background: linear-gradient(180deg, #0f3460 0%, #1a1a2e 100%);
     }
     
+    /* Sidebar headings */
     section[data-testid="stSidebar"] h1, 
     section[data-testid="stSidebar"] h2,
     section[data-testid="stSidebar"] h3 {
-        color: #e94560 !important;
+        color: #e94560 !important;  /* Pink color for headings */
     }
     
+    /* Chat input box */
     .stChatInput {
-        border-radius: 25px;
+        border-radius: 25px;  /* Very rounded corners */
     }
     
+    /* Buttons */
     .stButton > button {
-        background-color: #e94560;
-        color: white;
-        border-radius: 20px;
-        border: none;
-        padding: 10px 25px;
+        background-color: #e94560;  /* Pink background */
+        color: white;  /* White text */
+        border-radius: 20px;  /* Rounded corners */
+        border: none;  /* No border */
+        padding: 10px 25px;  /* Padding inside button */
     }
     
+    /* Button hover effect (when mouse is over it) */
     .stButton > button:hover {
-        background-color: #ff6b6b;
+        background-color: #ff6b6b;  /* Lighter pink on hover */
     }
 </style>
 """, unsafe_allow_html=True)
 
+# Display the main title
 st.title("🍽️ Seri Iskandar Restaurant Bot")
+
+# Display the subtitle
 st.caption("✨ Your AI assistant for finding great food in Seri Iskandar! ✨")
 
+# Initialize chat history in session state (persistent storage during session)
+# This keeps track of the conversation even when page refreshes
 if "messages" not in st.session_state:
-    st.session_state.messages = []
+    st.session_state.messages = []  # Create empty message list
+    
+    # Create welcome message
     welcome = """Hello! 👋 I'm your **Seri Iskandar Restaurant Guide**!
 
 Tell me what you're craving and I'll recommend the best spots. You can ask things like:
@@ -349,29 +454,50 @@ Tell me what you're craving and I'll recommend the best spots. You can ask thing
 - "Any cafe open late night?"
 
 **What are you in the mood for today?** 🍴"""
+    
+    # Add welcome message to chat history
     st.session_state.messages.append({"role": "assistant", "content": welcome})
 
+# Display all previous messages in the chat
 for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"], unsafe_allow_html=True)
+    # Create a chat message bubble for each message
+    with st.chat_message(message["role"]):  # "role" is either "user" or "assistant"
+        st.markdown(message["content"], unsafe_allow_html=True)  # Display the message text
 
+# Chat input box at the bottom
+# The := operator assigns AND checks the value in one line
 if prompt := st.chat_input("🔍 Ask me about restaurants..."):
+    # User typed something and pressed Enter
+    
+    # Add user's message to chat history
     st.session_state.messages.append({"role": "user", "content": prompt})
+    
+    # Display user's message
     with st.chat_message("user"):
         st.markdown(prompt)
     
-    response = generate_response(prompt)
+    # Generate bot's response
+    response = generate_response(prompt)  # Call our AI function
+    
+    # Add bot's response to chat history
     st.session_state.messages.append({"role": "assistant", "content": response})
+    
+    # Display bot's response
     with st.chat_message("assistant"):
         st.markdown(response, unsafe_allow_html=True)
 
+# Sidebar content (the panel on the left)
 with st.sidebar:
+    # Display restaurant icon
     st.image("https://img.icons8.com/clouds/200/restaurant.png", width=150)
+    
+    # About section
     st.header("🍜 About")
     st.write("This chatbot helps you find the perfect restaurant in Seri Iskandar, Perak.")
     
-    st.divider()
+    st.divider()  # Horizontal line separator
     
+    # Features section
     st.header("✨ Features")
     st.write("🍽️ Search by cuisine type")
     st.write("💰 Filter by budget")
@@ -380,10 +506,13 @@ with st.sidebar:
     
     st.divider()
     
+    # Quick tips section
     st.header("💡 Quick Tips")
-    st.code("I want nasi kandar", language=None)
+    st.code("I want nasi kandar", language=None)  # Display example queries
     st.code("Cheap breakfast spot", language=None)
     st.code("Western food cafe", language=None)
     
     st.divider()
+    
+    # Footer
     st.caption("Made with ❤️ for AI Assignment")
