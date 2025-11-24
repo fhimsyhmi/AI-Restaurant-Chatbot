@@ -351,9 +351,9 @@ st.markdown("""
 st.markdown("""
 <style>
     /* Main app background - gradient from dark blue to darker blue */
-    /*.stApp {
+    .stApp {
         background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-    }*/
+    }
 
     .stApp {
         background-image: url('https://unsplash.com/photos/flowers-beside-yellow-wall-vC8wj_Kphak');
