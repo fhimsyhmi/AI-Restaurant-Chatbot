@@ -355,24 +355,6 @@ st.markdown("""
         background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
     }
 
-    .stApp {
-        background-image: url('https://unsplash.com/photos/flowers-beside-yellow-wall-vC8wj_Kphak');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-    }
-
-    .stApp::before {
-        content: "";
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.65);
-        z-index: -1;
-    }
     
     /* Main title (h1) styling */
     h1 {
