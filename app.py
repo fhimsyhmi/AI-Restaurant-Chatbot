@@ -1,4 +1,3 @@
-%%writefile app.py
 import streamlit as st
 
 # ==================== RESTAURANT DATABASE ====================
@@ -136,25 +135,21 @@ def extract_preferences(message):
     msg_lower = message.lower()
     prefs = {"cuisine": None, "price": None, "food_type": None, "late_night": False}
     
-    # Check for cuisine preference
     for cuisine, keywords in CUISINE_KEYWORDS.items():
         if any(kw in msg_lower for kw in keywords):
             prefs["cuisine"] = cuisine
             break
     
-    # Check for price preference
     for price, keywords in PRICE_KEYWORDS.items():
         if any(kw in msg_lower for kw in keywords):
             prefs["price"] = price
             break
     
-    # Check for food type
     for food, keywords in FOOD_TYPE_KEYWORDS.items():
         if any(kw in msg_lower for kw in keywords):
             prefs["food_type"] = food
             break
     
-    # Check for late night
     if any(word in msg_lower for word in ["late", "night", "midnight", "24", "malam", "lewat"]):
         prefs["late_night"] = True
     
@@ -167,27 +162,22 @@ def find_restaurants(preferences):
     for restaurant in RESTAURANTS:
         score = 0
         
-        # Check cuisine match
         if preferences["cuisine"] and restaurant["cuisine"] == preferences["cuisine"]:
             score += 3
         
-        # Check price match
         if preferences["price"] and restaurant["price"] == preferences["price"]:
             score += 2
         
-        # Check food type match
         if preferences["food_type"]:
             if any(preferences["food_type"] in t for t in restaurant["type"]):
                 score += 2
         
-        # Check late night availability
         if preferences["late_night"] and "24" in restaurant["hours"]:
             score += 2
         
         if score > 0 or not any(preferences.values()):
             matches.append((restaurant, score))
     
-    # Sort by score (descending) then by rating
     matches.sort(key=lambda x: (x[1], x[0]["rating"]), reverse=True)
     return [m[0] for m in matches[:5]]
 
@@ -211,7 +201,6 @@ def generate_response(user_message):
     """Generate chatbot response based on user message."""
     msg_lower = user_message.lower()
     
-    # Greeting responses
     greetings = ["hi", "hello", "hey", "assalamualaikum", "hai"]
     if any(g in msg_lower for g in greetings):
         return """Hello! 👋 Welcome to the Seri Iskandar Restaurant Recommender!
@@ -225,7 +214,6 @@ I can help you find great places to eat. Just tell me:
 For example: "I want cheap Malay food" or "Any good cafe nearby?"
 """
 
-    # Help responses
     if any(h in msg_lower for h in ["help", "how", "what can"]):
         return """Here's how I can help you:
 
@@ -238,14 +226,12 @@ For example: "I want cheap Malay food" or "Any good cafe nearby?"
 Just ask naturally and I'll recommend the best spots!
 """
 
-    # Extract preferences and find matches
     prefs = extract_preferences(user_message)
     restaurants = find_restaurants(prefs)
     
     if not restaurants:
         return "Sorry, I couldn't find any restaurants matching your criteria. Try being less specific or ask for different options!"
     
-    # Build response
     response = "### 🍴 Here are my recommendations:\n\n"
     for r in restaurants[:3]:
         response += format_restaurant(r)
@@ -257,7 +243,6 @@ Just ask naturally and I'll recommend the best spots!
 
 # ==================== STREAMLIT UI ====================
 
-# Page Configuration
 st.set_page_config(
     page_title="Seri Iskandar Food Bot", 
     page_icon="🍽️",
@@ -265,7 +250,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# PWA Support - Makes it installable as mobile app
+# PWA Support
 st.markdown("""
 <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlNlcmkgSXNrYW5kYXIgUmVzdGF1cmFudCBCb3QiLAogICJzaG9ydF9uYW1lIjogIkZvb2QgQm90IiwKICAiZGVzY3JpcHRpb24iOiAiQUkgUmVzdGF1cmFudCBSZWNvbW1lbmRlciBmb3IgU2VyaSBJc2thbmRhciIsCiAgInN0YXJ0X3VybCI6ICIvIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjMWExYTJlIiwKICAidGhlbWVfY29sb3IiOiAiI2U5NDU2MCIsCiAgIm9yaWVudGF0aW9uIjogInBvcnRyYWl0IiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiaHR0cHM6Ly9pbWcuaWNvbnM4LmNvbS9jbG91ZHMvMTkyL3Jlc3RhdXJhbnQucG5nIiwKICAgICAgInNpemVzIjogIjE5MngxOTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciCiAgICB9LAogICAgewogICAgICAic3JjIjogImh0dHBzOi8vaW1nLmljb25zOC5jb20vY2xvdWRzLzUxMi9yZXN0YXVyYW50LnBuZyIsCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfQogIF0KfQ==">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -279,12 +264,10 @@ st.markdown("""
 # Custom CSS Styling
 st.markdown("""
 <style>
-    /* Main background gradient */
     .stApp {
         background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
     }
     
-    /* Title styling */
     h1 {
         color: #e94560 !important;
         text-align: center;
@@ -292,14 +275,12 @@ st.markdown("""
         text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
     }
     
-    /* Subtitle */
     .stCaption {
         text-align: center;
         color: #a2d2ff !important;
         font-size: 1.1rem !important;
     }
     
-    /* Chat messages */
     .stChatMessage {
         background-color: rgba(255,255,255,0.05);
         border-radius: 15px;
@@ -307,7 +288,6 @@ st.markdown("""
         margin: 5px 0;
     }
     
-    /* Restaurant card */
     .restaurant-card {
         background: linear-gradient(145deg, #0f3460, #16213e);
         border-radius: 15px;
@@ -328,7 +308,6 @@ st.markdown("""
         margin: 5px 0;
     }
     
-    /* Sidebar styling */
     section[data-testid="stSidebar"] {
         background: linear-gradient(180deg, #0f3460 0%, #1a1a2e 100%);
     }
@@ -339,12 +318,10 @@ st.markdown("""
         color: #e94560 !important;
     }
     
-    /* Input box */
     .stChatInput {
         border-radius: 25px;
     }
     
-    /* Buttons */
     .stButton > button {
         background-color: #e94560;
         color: white;
@@ -359,11 +336,9 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Header
 st.title("🍽️ Seri Iskandar Restaurant Bot")
 st.caption("✨ Your AI assistant for finding great food in Seri Iskandar! ✨")
 
-# Initialize chat history
 if "messages" not in st.session_state:
     st.session_state.messages = []
     welcome = """Hello! 👋 I'm your **Seri Iskandar Restaurant Guide**!
@@ -376,25 +351,20 @@ Tell me what you're craving and I'll recommend the best spots. You can ask thing
 **What are you in the mood for today?** 🍴"""
     st.session_state.messages.append({"role": "assistant", "content": welcome})
 
-# Display chat history
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"], unsafe_allow_html=True)
 
-# Chat input
 if prompt := st.chat_input("🔍 Ask me about restaurants..."):
-    # Add user message
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
     
-    # Generate and display response
     response = generate_response(prompt)
     st.session_state.messages.append({"role": "assistant", "content": response})
     with st.chat_message("assistant"):
         st.markdown(response, unsafe_allow_html=True)
 
-# Sidebar
 with st.sidebar:
     st.image("https://img.icons8.com/clouds/200/restaurant.png", width=150)
     st.header("🍜 About")
