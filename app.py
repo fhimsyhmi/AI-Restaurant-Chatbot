@@ -350,103 +350,112 @@ st.markdown("""
 # CSS (Cascading Style Sheets) defines colors, sizes, fonts, etc.
 st.markdown("""
 <style>
-    /* Main app background - gradient from dark blue to darker blue */
+    /* Main background with image */
     .stApp {
-        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1920');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
     }
-
     
-    /* Main title (h1) styling */
+    /* Dark overlay for readability */
+    .stApp::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.65);
+        z-index: -1;
+    }
+    
+    /* Title styling */
     h1 {
-        color: #e94560 !important;  /* Pink/red color */
-        text-align: center;  /* Center the text */
-        font-size: 2.5rem !important;  /* Large text size */
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);  /* Subtle shadow effect */
+        color: #e94560 !important;
+        text-align: center;
+        font-size: 2.5rem !important;
+        text-shadow: 3px 3px 6px rgba(0,0,0,0.9);
     }
     
-    /* Subtitle/caption styling */
+    /* Subtitle */
     .stCaption {
         text-align: center;
-        color: #a2d2ff !important;  /* Light blue color */
+        color: #a2d2ff !important;
         font-size: 1.1rem !important;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
     }
     
-    /* Chat message bubbles */
+    /* Chat messages with blur effect */
     .stChatMessage {
-        background-color: rgba(255,255,255,0.05);  /* Slightly transparent white */
-        border-radius: 15px;  /* Rounded corners */
+        background-color: rgba(255,255,255,0.1) !important;
+        border-radius: 15px;
         padding: 10px;
         margin: 5px 0;
+        backdrop-filter: blur(15px);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
     
-    /* Restaurant information cards */
+    /* Restaurant cards with glass effect */
     .restaurant-card {
-        background: linear-gradient(145deg, #0f3460, #16213e);  /* Gradient background */
-        border-radius: 15px;  /* Rounded corners */
-        padding: 20px;  /* Space inside the card */
-        margin: 15px 0;  /* Space between cards */
-        border-left: 4px solid #e94560;  /* Pink left border as accent */
-        box-shadow: 0 4px 15px rgba(0,0,0,0.3);  /* Shadow for depth */
+        background: rgba(15, 52, 96, 0.75);
+        border-radius: 15px;
+        padding: 20px;
+        margin: 15px 0;
+        border-left: 4px solid #e94560;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        backdrop-filter: blur(15px);
     }
     
-    /* Restaurant card title */
     .restaurant-card h4 {
-        color: #e94560;  /* Pink color */
+        color: #e94560;
         margin-bottom: 10px;
         font-size: 1.2rem;
     }
     
-    /* Restaurant card text */
     .restaurant-card p {
-        color: #eaeaea;  /* Light gray color for readability */
+        color: #eaeaea;
         margin: 5px 0;
     }
     
-    /* Sidebar background */
+    /* Sidebar with glass effect */
     section[data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #0f3460 0%, #1a1a2e 100%);
+        background: rgba(15, 52, 96, 0.85) !important;
+        backdrop-filter: blur(15px);
     }
     
-    /* Sidebar headings */
     section[data-testid="stSidebar"] h1, 
     section[data-testid="stSidebar"] h2,
     section[data-testid="stSidebar"] h3 {
-        color: #e94560 !important;  /* Pink color for headings */
+        color: #e94560 !important;
     }
     
-    /* Chat input box */
+    /* Chat input */
     .stChatInput {
-        border-radius: 25px;  /* Very rounded corners */
+        border-radius: 25px;
     }
     
     /* Buttons */
     .stButton > button {
-        background-color: #e94560;  /* Pink background */
-        color: white;  /* White text */
-        border-radius: 20px;  /* Rounded corners */
-        border: none;  /* No border */
-        padding: 10px 25px;  /* Padding inside button */
+        background-color: #e94560;
+        color: white;
+        border-radius: 20px;
+        border: none;
+        padding: 10px 25px;
     }
     
-    /* Button hover effect (when mouse is over it) */
     .stButton > button:hover {
-        background-color: #ff6b6b;  /* Lighter pink on hover */
+        background-color: #ff6b6b;
     }
 </style>
 """, unsafe_allow_html=True)
 
-# Display the main title
 st.title("🍽️ Seri Iskandar Restaurant Bot")
-
-# Display the subtitle
 st.caption("✨ Your AI assistant for finding great food in Seri Iskandar! ✨")
 
-# Initialize chat history in session state (persistent storage during session)
-# This keeps track of the conversation even when page refreshes
 if "messages" not in st.session_state:
-    st.session_state.messages = []  # Create empty message list
-    
-    # Create welcome message
+    st.session_state.messages = []
     welcome = """Hello! 👋 I'm your **Seri Iskandar Restaurant Guide**!
 
 Tell me what you're craving and I'll recommend the best spots. You can ask things like:
@@ -455,50 +464,29 @@ Tell me what you're craving and I'll recommend the best spots. You can ask thing
 - "Any cafe open late night?"
 
 **What are you in the mood for today?** 🍴"""
-    
-    # Add welcome message to chat history
     st.session_state.messages.append({"role": "assistant", "content": welcome})
 
-# Display all previous messages in the chat
 for message in st.session_state.messages:
-    # Create a chat message bubble for each message
-    with st.chat_message(message["role"]):  # "role" is either "user" or "assistant"
-        st.markdown(message["content"], unsafe_allow_html=True)  # Display the message text
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"], unsafe_allow_html=True)
 
-# Chat input box at the bottom
-# The := operator assigns AND checks the value in one line
 if prompt := st.chat_input("🔍 Ask me about restaurants..."):
-    # User typed something and pressed Enter
-    
-    # Add user's message to chat history
     st.session_state.messages.append({"role": "user", "content": prompt})
-    
-    # Display user's message
     with st.chat_message("user"):
         st.markdown(prompt)
     
-    # Generate bot's response
-    response = generate_response(prompt)  # Call our AI function
-    
-    # Add bot's response to chat history
+    response = generate_response(prompt)
     st.session_state.messages.append({"role": "assistant", "content": response})
-    
-    # Display bot's response
     with st.chat_message("assistant"):
         st.markdown(response, unsafe_allow_html=True)
 
-# Sidebar content (the panel on the left)
 with st.sidebar:
-    # Display restaurant icon
     st.image("https://img.icons8.com/clouds/200/restaurant.png", width=150)
-    
-    # About section
     st.header("🍜 About")
     st.write("This chatbot helps you find the perfect restaurant in Seri Iskandar, Perak.")
     
-    st.divider()  # Horizontal line separator
+    st.divider()
     
-    # Features section
     st.header("✨ Features")
     st.write("🍽️ Search by cuisine type")
     st.write("💰 Filter by budget")
@@ -507,13 +495,10 @@ with st.sidebar:
     
     st.divider()
     
-    # Quick tips section
     st.header("💡 Quick Tips")
-    st.code("I want nasi kandar", language=None)  # Display example queries
+    st.code("I want nasi kandar", language=None)
     st.code("Cheap breakfast spot", language=None)
     st.code("Western food cafe", language=None)
     
     st.divider()
-    
-    # Footer
     st.caption("Made with ❤️ for AI Assignment")
