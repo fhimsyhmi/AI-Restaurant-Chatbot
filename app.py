@@ -352,7 +352,7 @@ st.markdown("""
 <style>
     /* Main background with image */
     .stApp {
-        background-image: url('https://unsplash.com/photos/a-table-topped-with-lots-of-plates-of-food-hatqfX3b9Vo');
+        background-image: url('https://unsplash.com/photos/pizza-on-chopping-board-MqT0asuoIcU');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
