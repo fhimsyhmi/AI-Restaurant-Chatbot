@@ -636,6 +636,11 @@ def format_restaurant(r):
 """
 
 # chatbot
+# typing....
+with st.chat_message("assistant"):
+    with st.spinner("Finding the best food for you... 🍳"):
+        response = generate_response(prompt)
+        
 def generate_response(user_message):
     """Generate chatbot response based on user message."""
     msg_lower = user_message.lower()
@@ -666,12 +671,7 @@ Combinations: "Cheap Malay food for breakfast"
 
 Just ask naturally and I'll recommend the best spots!
 """
-    
-    # typing....
-    with st.chat_message("assistant"):
-        with st.spinner("Finding the best food for you... 🍳"):
-            response = generate_response(prompt)
-        
+     
     # extract user preferences and find matching restaurants
     prefs = extract_preferences(user_message)
     restaurants = find_restaurants(prefs)
