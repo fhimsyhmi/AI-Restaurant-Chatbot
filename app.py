@@ -395,6 +395,8 @@ def format_restaurant(r):
     <p>📍 <strong>Location:</strong> {r['location']}</p>
     <p>🕐 <strong>Hours:</strong> {r['hours']}</p>
     <p>📝 {r['description']}</p>
+    <p>🗺️ <strong>Map:</strong> <a href="{r['map_link']}" target="_blank">View on Google Maps</a></p>
+
 </div>
 """
 
