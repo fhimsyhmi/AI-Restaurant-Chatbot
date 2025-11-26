@@ -374,8 +374,9 @@ FOOD_TYPE_KEYWORDS = {
 }
 
 # AI FUNCTIONS
-# These are the core functions that make the chatbot "intelligent"
+# core functions that make the chatbot intelligent
 
+# extract message from user
 def extract_preferences(message):
     """
     Extract user preferences from their message.
@@ -389,36 +390,37 @@ def extract_preferences(message):
     """
     msg_lower = message.lower()  # Convert message to lowercase for easier matching
     
-    # Initialize empty preferences dictionary
+    # initialize empty preferences dictionary
     prefs = {"cuisine": None, "price": None, "food_type": None, "late_night": False}
     
-    # Check if user mentioned a cuisine type
-    # Loop through each cuisine category and its keywords
+    # check if user mention cuisine type
+    # loop through each cuisine category and its keywords
     for cuisine, keywords in CUISINE_KEYWORDS.items():
-        # Check if any keyword appears in the user's message
+        # check if any keyword appears in the user message
         if any(kw in msg_lower for kw in keywords):
-            prefs["cuisine"] = cuisine  # Save the cuisine preference
-            break  # Stop after finding first match
+            prefs["cuisine"] = cuisine  # save the cuisine preference
+            break  # stop after finding first match
     
-    # Check if user mentioned a price preference
+    # check if user mention a price preference
     for price, keywords in PRICE_KEYWORDS.items():
         if any(kw in msg_lower for kw in keywords):
-            prefs["price"] = price  # Save the price preference
+            prefs["price"] = price  # save the price preference
             break
     
-    # Check if user mentioned a specific food type
+    # check if user mention a specific food type
     for food, keywords in FOOD_TYPE_KEYWORDS.items():
         if any(kw in msg_lower for kw in keywords):
-            prefs["food_type"] = food  # Save the food type preference
+            prefs["food_type"] = food  # save the food type preference
             break
     
-    # Check if user wants late-night options
+    # check if user wants late night options
     # Look for words related to late night or 24-hour service
     if any(word in msg_lower for word in ["late", "night", "midnight", "24", "malam", "lewat"]):
         prefs["late_night"] = True
     
-    return prefs  # Return the extracted preferences
+    return prefs  # return the extracted preferences
 
+#find restaurant
 def find_restaurants(preferences):
     """
     Find restaurants matching user preferences using a scoring system.
@@ -432,38 +434,39 @@ def find_restaurants(preferences):
     """
     matches = []  # List to store (restaurant, score) tuples
     
-    # Loop through each restaurant in our database
+    # loop through each restaurant in our database
     for restaurant in RESTAURANTS:
-        score = 0  # Initialize score for this restaurant
+        score = 0  # initialize score for this restaurant
         
-        # Give 3 points if cuisine matches
+        # 3 points if cuisine matches
         if preferences["cuisine"] and restaurant["cuisine"] == preferences["cuisine"]:
             score += 3
         
-        # Give 2 points if price range matches
+        # 2 points if price range matches
         if preferences["price"] and restaurant["price"] == preferences["price"]:
             score += 2
         
-        # Give 2 points if the restaurant serves the requested food type
+        # 2 points if the restaurant serves the requested food type
         if preferences["food_type"]:
             # Check if food_type appears in any of the restaurant's type list
             if any(preferences["food_type"] in t for t in restaurant["type"]):
                 score += 2
         
-        # Give 2 points if restaurant is open 24 hours and user wants late-night food
+        # 2 points if restaurant is open 24 hours and user wants late night food
         if preferences["late_night"] and "24" in restaurant["hours"]:
             score += 2
         
-        # Add restaurant to matches if it has any score OR if user didn't specify preferences
+        # add restaurant to matches if it has any score OR if user didn't specify preferences
         if score > 0 or not any(preferences.values()):
-            matches.append((restaurant, score))  # Store restaurant with its score
+            matches.append((restaurant, score))  # store restaurant with its score
     
-    # Sort matches by score (highest first), then by rating (highest first)
+    # sort matches by score then by rating
     matches.sort(key=lambda x: (x[1], x[0]["rating"]), reverse=True)
     
-    # Return only the restaurants (not scores), limited to top 5
+    # return only the restaurants, limited to top 5
     return [m[0] for m in matches[:5]]
 
+# UI restaurant
 def format_restaurant(r):
     """
     Format restaurant information into nice-looking HTML for display.
@@ -475,10 +478,10 @@ def format_restaurant(r):
     Returns:
         str: HTML-formatted string for displaying the restaurant
     """
-    # Dictionary mapping price categories to emoji symbols
-    price_emoji = {"budget": "💰", "moderate": "💰💰", "expensive": "💰💰💰"}
+    # mapping price categories to emoji symbols
+    price_emoji = {"budget": "💸", "moderate": "💸💸", "expensive": "💸💸💸"}
     
-    # Create star rating visualization (e.g., 4.2 becomes ⭐⭐⭐⭐)
+    # star rating visualization
     stars = "⭐" * int(r['rating'])
     
     # Return formatted HTML string with restaurant details
@@ -497,56 +500,57 @@ def format_restaurant(r):
 </div>
 """
 
+# chatbot
 def generate_response(user_message):
     """Generate chatbot response based on user message."""
     msg_lower = user_message.lower()
     
-    # Handle greetings
+    # greetings
     greetings = ["hi", "hello", "hey", "assalamualaikum", "hai"]
     if any(g in msg_lower for g in greetings):
-        return """Hello! 👋 Welcome to the Seri Iskandar Restaurant Recommender!
+        return """Hello! Welcome to the Seri Iskandar Restaurant Recommender!
 
 I can help you find great places to eat. Just tell me:
-- What cuisine you prefer (Malay, Chinese, Indian, Western, Arab)
+- What cuisine you prefer (Malay, Indian, Western, Arab, Thai, Fast Food)
 - Your budget (cheap, moderate, expensive)
 - Type of food (rice, seafood, breakfast, coffee, etc.)
 - If you need late-night options
 
-For example: "I want cheap Malay food" or "Any good cafe nearby?"
+For example: "I want cheap Malay food" or "I want late night food"
 """
 
-    # Handle help requests
+    # help requests
     if any(h in msg_lower for h in ["help", "how", "what can"]):
         return """Here's how I can help you:
 
-🍜 **Find by cuisine**: "Show me Chinese restaurants"
-💵 **Find by budget**: "I want cheap food"
-🍛 **Find by food type**: "Where can I get nasi kandar?"
-🌙 **Late night options**: "What's open late at night?"
-🔄 **Combinations**: "Cheap Malay food for breakfast"
+Find by cuisine: "Show me nearest mamak"
+Find by budget: "I want cheap food"
+Find by food type: "Where can I get nasi kandar?"
+Late night options: "What's open late at night?"
+Combinations: "Cheap Malay food for breakfast"
 
 Just ask naturally and I'll recommend the best spots!
 """
 
-    # Extract user preferences and find matching restaurants
+    # extract user preferences and find matching restaurants
     prefs = extract_preferences(user_message)
     restaurants = find_restaurants(prefs)
     
-    # If no matches found
+    # if no matches found
     if not restaurants:
         return "Sorry, I couldn't find any restaurants matching your criteria. Try being less specific or ask for different options!"
     
-    # Build response header based on number of results
+    # build response header based on number of results
     if len(restaurants) == 1:
-        response = "### 🍴 Here is my recommendation:\n\n"
+        response = "### Here is my recommendation:\n\n"
     else:
-        response = f"### 🍴 Here are my top {len(restaurants)} recommendations:\n\n"
+        response = f"### Here are my top {len(restaurants)} recommendations:\n\n"
     
-    # Display ALL restaurants found (no limit!)
+    # display ALL restaurants found (no limit!)
     for r in restaurants:
         response += format_restaurant(r)
     
-    # Add footer message
+    # footer message
     if len(restaurants) == 1:
         response += "\n\n✅ _This is the best match for your preferences!_"
     else:
@@ -555,12 +559,12 @@ Just ask naturally and I'll recommend the best spots!
     
     return response
 
-# ==================== STREAMLIT UI ====================
-# This section creates the actual website interface
+# STREAMLIT UI
+# website interface
 
-# Configure the page settings
+# page settings
 st.set_page_config(
-    page_title="Seri Iskandar Food Bot",  # Browser tab title
+    page_title="SI Foodie",  # Browser tab title
     page_icon="🍽️",  # Browser tab icon
     layout="centered",  # Center the content (alternative: "wide")
     initial_sidebar_state="expanded"  # Show sidebar by default
@@ -683,7 +687,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.title("🍽️ Seri Iskandar Restaurant Bot")
+st.title("🍽️ Seri Iskandar Foodie")
 st.caption("✨ Your AI assistant for finding great food in Seri Iskandar! ✨")
 
 if "messages" not in st.session_state:
@@ -713,8 +717,8 @@ if prompt := st.chat_input("🔍 Ask me about restaurants..."):
         st.markdown(response, unsafe_allow_html=True)
 
 with st.sidebar:
-    st.image("https://img.icons8.com/clouds/200/restaurant.png", width=150)
-    st.header("🍜 About")
+    st.image("https://cdn.aptoide.com/imgs/6/4/5/645d30066e92a19540c170e0fc974ad2_icon.png", width=150)
+    st.header("🍛 About")
     st.write("This chatbot helps you find the perfect restaurant in Seri Iskandar, Perak.")
     
     st.divider()
