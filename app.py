@@ -501,4 +501,4 @@ with st.sidebar:
     st.code("Western food cafe", language=None)
     
     st.divider()
-    st.caption("Made with ❤️ for AI Assignment")
+    
