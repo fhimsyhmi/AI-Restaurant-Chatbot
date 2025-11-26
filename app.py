@@ -969,7 +969,7 @@ def spinning_wheel(restaurants):
     choice = components.html(html, height=500)
     return choice
 
-    with st.sidebar:
+with st.sidebar:
     st.divider()
     st.header("🎡 Feeling Indecisive?")
     spinning_choice = spinning_wheel(RESTAURANTS)
