@@ -241,6 +241,110 @@ RESTAURANTS = [
         "hours": "4pm - 11pm",
         "description": "Relaxed cafe serving western and Malaysian fusion dishes.",
         "map_link": "https://maps.app.goo.gl/H7FkTCuSBvAwXn6L9"
+    },
+
+    # ======================
+    # THAI
+    # ======================
+
+    {
+        "name": "Pak Ngah Tomyam",
+        "cuisine": "thai",
+        "type": ["tomyam", "thai", "seafood"],
+        "price": "budget",
+        "location": "Seri Iskandar",
+        "rating": 4.1,
+        "hours": "4pm - 12am",
+        "description": "Popular late-night tomyam spot with Thai-style seafood dishes.",
+        "map_link": "https://www.google.com/maps/search/Pak+Ngah+Tomyam+Seri+Iskandar"
+    },
+    {
+        "name": "Utama Tomyam Seafood",
+        "cuisine": "thai",
+        "type": ["tomyam", "seafood", "thai"],
+        "price": "budget",
+        "location": "Seri Iskandar",
+        "rating": 4.0,
+        "hours": "4pm - 1am",
+        "description": "Thai seafood tomyam with wide variety of lauk goreng.",
+        "map_link": "https://www.google.com/maps/search/Utama+Tomyam+Seafood+Seri+Iskandar"
+    },
+    {
+        "name": "D'Asean Ala Thai Seafood",
+        "cuisine": "thai",
+        "type": ["thai", "seafood", "tomyam"],
+        "price": "moderate",
+        "location": "Seri Iskandar",
+        "rating": 4.2,
+        "hours": "5pm - 12am",
+        "description": "Asean-style Thai seafood with nicer ambience for group dining.",
+        "map_link": "https://www.google.com/maps/search/D+Asean+Ala+Thai+Seafood+Seri+Iskandar"
+    },
+    {
+        "name": "Farhan Tomyam Restaurant",
+        "cuisine": "thai",
+        "type": ["tomyam", "thai", "seafood"],
+        "price": "budget",
+        "location": "Seri Iskandar",
+        "rating": 4.0,
+        "hours": "4pm - 12am",
+        "description": "Simple tomyam stall serving classic Thai dishes with fast service.",
+        "map_link": "https://www.google.com/maps/search/Farhan+Tomyam+Restaurant+Seri+Iskandar"
+    },
+    {
+        "name": "Arif Tomyam",
+        "cuisine": "thai",
+        "type": ["tomyam", "thai", "seafood"],
+        "price": "budget",
+        "location": "Bandar Universiti",
+        "rating": 4.0,
+        "hours": "5pm - 12am",
+        "description": "Comfort tomyam place near student area, good for supper.",
+        "map_link": "https://www.google.com/maps/search/Arif+Tomyam+Bandar+Universiti"
+    },
+    {
+        "name": "D'Krabi Tomyam Classic",
+        "cuisine": "thai",
+        "type": ["tomyam", "thai", "seafood"],
+        "price": "moderate",
+        "location": "Seri Iskandar",
+        "rating": 4.3,
+        "hours": "5pm - 1am",
+        "description": "Thai-inspired tomyam with richer flavours and seafood variety.",
+        "map_link": "https://www.google.com/maps/search/D+Krabi+Tomyam+Classic+Seri+Iskandar+Perak"
+    },
+    {
+        "name": "Krua Thai Tomyam",
+        "cuisine": "thai",
+        "type": ["thai", "tomyam", "rice"],
+        "price": "moderate",
+        "location": "Seri Iskandar",
+        "rating": 4.2,
+        "hours": "11am - 10pm",
+        "description": "Thai home-style cooking with tomyam and rice-based dishes.",
+        "map_link": "https://www.google.com/maps/search/Krua+Thai+Tomyam+Seri+Iskandar"
+    },
+    {
+        "name": "Farisha Tomyam Kung",
+        "cuisine": "thai",
+        "type": ["tomyam", "seafood", "thai"],
+        "price": "budget",
+        "location": "Seri Iskandar",
+        "rating": 4.0,
+        "hours": "4pm - 12am",
+        "description": "Tomyam kung seafood with strong spicy and sour flavours.",
+        "map_link": "https://www.google.com/maps/search/Farisha+Tomyam+Kung+Seri+Iskandar"
+    },
+    {
+        "name": "Nik Tomyam",
+        "cuisine": "thai",
+        "type": ["tomyam", "thai", "seafood"],
+        "price": "budget",
+        "location": "Seri Iskandar",
+        "rating": 4.1,
+        "hours": "5pm - 12am",
+        "description": "Casual roadside tomyam, popular for supper among students.",
+        "map_link": "https://www.google.com/maps/search/Nik+Tomyam+Seri+Iskandar"
     }
 ]
 
