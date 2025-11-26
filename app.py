@@ -1,6 +1,7 @@
 # Import the Streamlit library
 import streamlit as st
-# Import json
+
+# Import json spin the wheel
 import streamlit.components.v1 as components
 import json
 
@@ -872,7 +873,7 @@ with st.sidebar:
     
     st.divider()
 
-# spin the wheel
+# spin the wheel interface
 def spinning_wheel(restaurants):
     names = [r["name"] for r in restaurants]
 
@@ -969,6 +970,7 @@ def spinning_wheel(restaurants):
     choice = components.html(html, height=500)
     return choice
 
+# sidebar spin the wheel
 with st.sidebar:
     st.divider()
     st.header("🎡 Feeling Indecisive?")
@@ -992,5 +994,25 @@ if isinstance(spinning_choice, str):
     st.session_state.messages.append(
         {"role": "assistant", "content": message}
     )
+
+# typing....
+with st.chat_message("assistant"):
+    with st.spinner("Finding the best food for you... 🍳"):
+        response = generate_response(prompt)
+
+# back to top button
+st.markdown("""
+<a href="#" style="
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #e94560;
+    padding: 10px 14px;
+    border-radius: 50%;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;">⬆️</a>
+""", unsafe_allow_html=True)
+
 
 
