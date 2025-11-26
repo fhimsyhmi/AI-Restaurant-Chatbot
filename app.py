@@ -1009,5 +1009,62 @@ st.markdown("""
     font-size: 18px;">⬆️</a>
 """, unsafe_allow_html=True)
 
+# typing...
+<style>
+.typing {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.typing span {
+    width: 8px;
+    height: 8px;
+    background: #e94560;
+    border-radius: 50%;
+    animation: blink 1.4s infinite both;
+}
+
+.typing span:nth-child(2) {
+    animation-delay: .2s;
+}
+.typing span:nth-child(3) {
+    animation-delay: .4s;
+}
+
+@keyframes blink {
+    0% { opacity: .2; }
+    20% { opacity: 1; }
+    100% { opacity: .2; }
+}
+</style>
+
+typing_placeholder = None
+
+with st.chat_message("assistant"):
+    typing_placeholder = st.empty()
+    typing_placeholder.markdown("""
+    <div class="typing">
+        <span></span><span></span><span></span>
+        <p style="margin-left:10px;color:#ccc;">SI Foodie is typing...</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+# simulate thinking
+import time
+time.sleep(1)
+
+response = generate_response(prompt)
+
+typing_placeholder.empty()
+
+with st.chat_message("assistant"):
+    st.markdown(response, unsafe_allow_html=True)
+
+st.session_state.messages.append(
+    {"role": "assistant", "content": response}
+)
+
+
 
 
