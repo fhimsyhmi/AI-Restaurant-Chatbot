@@ -14,12 +14,12 @@ RESTAURANTS = [
         "name": "Little Ipoh Cafe",
         "cuisine": "malay",
         "type": ["local", "rice", "noodles"],
-        "price": "budget",
+        "price": "moderate",
         "location": "Seri Iskandar",
-        "rating": 4.1,
-        "hours": "8am - 9pm",
+        "rating": 4.0,
+        "hours": "7am - 5pm",
         "description": "Local Malaysian dishes inspired by Ipoh-style home cooking.",
-        "map_link": "https://www.google.com/maps/search/Little+Ipoh+Cafe+Seri+Iskandar"
+        "map_link": "https://maps.app.goo.gl/DqctWg3GnDFz1kW7A"
     },
     {
         "name": "Gomore Kitchen",
@@ -27,10 +27,10 @@ RESTAURANTS = [
         "type": ["local", "rice", "fried dishes"],
         "price": "budget",
         "location": "Bandar Universiti",
-        "rating": 4.0,
-        "hours": "10am - 10pm",
+        "rating": 4.4,
+        "hours": "11am - 7pm",
         "description": "Comfort food with affordable Malaysian rice and noodle dishes.",
-        "map_link": "https://www.google.com/maps/search/Gomore+Kitchen+Seri+Iskandar"
+        "map_link": "https://maps.app.goo.gl/PwZSQrYUnveE3rbU6"
     },
     {
         "name": "Restoran Bunda Seri Iskandar",
@@ -38,21 +38,21 @@ RESTAURANTS = [
         "type": ["local", "nasi campur", "home-style"],
         "price": "budget",
         "location": "Seri Iskandar",
-        "rating": 4.1,
+        "rating": 4.2,
         "hours": "7am - 11pm",
         "description": "Popular local spot for nasi campur and traditional Malay dishes.",
-        "map_link": "https://www.google.com/maps/search/Restoran+Bunda+Seri+Iskandar"
+        "map_link": "https://maps.app.goo.gl/dutkaGWRYYEsisiC7"
     },
     {
         "name": "Ayam Gepuk Pak Gembus",
         "cuisine": "malay",
         "type": ["ayam gepuk", "spicy", "rice"],
-        "price": "budget",
+        "price": "expensive",
         "location": "Seri Iskandar",
-        "rating": 4.2,
-        "hours": "11am - 10pm",
+        "rating": 3.1,
+        "hours": "10am - 11pm",
         "description": "Famous Indonesian-style ayam gepuk with spicy sambal.",
-        "map_link": "https://www.google.com/maps/search/Ayam+Gepuk+Pak+Gembus+Seri+Iskandar"
+        "map_link": "https://maps.app.goo.gl/45BBoV7G5QyHVzhA7"
     },
     {
         "name": "Warung Cha HQ",
@@ -60,10 +60,10 @@ RESTAURANTS = [
         "type": ["tea", "beverages", "snacks"],
         "price": "budget",
         "location": "Bandar Universiti",
-        "rating": 4.0,
-        "hours": "12pm - 12am",
+        "rating": 4.2,
+        "hours": "8.30am - 6pm",
         "description": "Casual hangout serving flavored tea, drinks, and light snacks.",
-        "map_link": "https://www.google.com/maps/search/Warung+Cha+HQ+Seri+Iskandar"
+        "map_link": "https://maps.app.goo.gl/Kzz2aCeb2dpEXJkc8"
     },
     {
         "name": "Makan Pagi D' Cafetiam",
@@ -71,32 +71,32 @@ RESTAURANTS = [
         "type": ["breakfast", "rice", "roti canai"],
         "price": "budget",
         "location": "Seri Iskandar",
-        "rating": 4.0,
-        "hours": "6am - 12pm",
+        "rating": 4.3,
+        "hours": "6.30am - 12.30pm",
         "description": "Breakfast-focused spot offering local morning dishes.",
-        "map_link": "https://www.google.com/maps/search/Makan+Pagi+D+Cafetiam+Seri+Iskandar"
+        "map_link": "https://maps.app.goo.gl/ZoGVRdZ5Tg4odwjG8"
     },
     {
         "name": "Ayam Gepuk Pak Gendut",
         "cuisine": "malay",
         "type": ["ayam gepuk", "rice", "spicy"],
-        "price": "budget",
+        "price": "expensive",
         "location": "Seri Iskandar",
-        "rating": 4.1,
-        "hours": "11am - 10pm",
+        "rating": 3.7,
+        "hours": "11.30am - 7.30pm",
         "description": "Spicy ayam gepuk with generous portion, student favourite.",
-        "map_link": "https://www.google.com/maps/search/Ayam+Gepuk+Pak+Gendut+Seri+Iskandar"
+        "map_link": "https://maps.app.goo.gl/JRcKHFkEVNBk6Xpr6"
     },
     {
         "name": "Ayam Gepuk Tok Pa",
         "cuisine": "malay",
         "type": ["ayam gepuk", "rice", "spicy"],
-        "price": "budget",
+        "price": "expensive",
         "location": "Seri Iskandar",
-        "rating": 4.0,
-        "hours": "11am - 10pm",
+        "rating": 4.6,
+        "hours": "11am - 6pm",
         "description": "Local ayam gepuk with homemade sambal and crispy chicken.",
-        "map_link": "https://www.google.com/maps/search/Ayam+Gepuk+Tok+Pa+Seri+Iskandar"
+        "map_link": "https://maps.app.goo.gl/vSMpTdcwbw4HX5Qa7"
     },
 
     # ======================
@@ -111,7 +111,7 @@ RESTAURANTS = [
         "rating": 4.0,
         "hours": "24 hours",
         "description": "Mamak restaurant serving nasi kandar, roti canai and tomyam.",
-        "map_link": "https://www.google.com/maps/search/Rahman+Corner+Seri+Iskandar"
+        "map_link": "https://maps.app.goo.gl/khYDLzkQmpZYw3LH9"
     },
     {
         "name": "Restoran Al Bayan",
@@ -119,10 +119,10 @@ RESTAURANTS = [
         "type": ["mamak", "briyani", "rice"],
         "price": "budget",
         "location": "Seri Iskandar",
-        "rating": 3.9,
-        "hours": "7am - 11pm",
+        "rating": 3.6,
+        "hours": "24 hours",
         "description": "Indian Muslim dishes including briyani and curry rice.",
-        "map_link": "https://www.google.com/maps/search/Restoran+Al+Bayan+Seri+Iskandar"
+        "map_link": "https://maps.app.goo.gl/6RuXQ3qY33NFpjjJA"
     },
     {
         "name": "Restoran Nasi Vanggey",
@@ -130,10 +130,10 @@ RESTAURANTS = [
         "type": ["nasi vanggey", "rice", "curry"],
         "price": "budget",
         "location": "Seri Iskandar",
-        "rating": 4.1,
-        "hours": "10am - 9pm",
+        "rating": 3.7,
+        "hours": "24 hours",
         "description": "Ipoh-style nasi vanggey known for rich curry flavors.",
-        "map_link": "https://www.google.com/maps/search/Restoran+Nasi+Vanggey+Seri+Iskandar"
+        "map_link": "https://maps.app.goo.gl/RsSPj2wk8Zyj311R7"
     },
     {
         "name": "Bilal Bistro Nasi Kandar",
@@ -141,25 +141,25 @@ RESTAURANTS = [
         "type": ["nasi kandar", "rice", "mamak"],
         "price": "budget",
         "location": "Seri Iskandar",
-        "rating": 4.0,
+        "rating": 2.2,
         "hours": "24 hours",
         "description": "Affordable nasi kandar suitable for late-night meals.",
-        "map_link": "https://www.google.com/maps/search/Bilal+Bistro+Nasi+Kandar+Seri+Iskandar"
+        "map_link": "https://maps.app.goo.gl/xz8eK1dNY6hqze8M7"
     },
 
     # ======================
     # ARAB
     # ======================
     {
-        "name": "Restoran Nasi Arab Sana'ah",
+        "name": "Restoran Nasi Arab Sana'a",
         "cuisine": "arab",
         "type": ["arab", "mandi", "rice"],
         "price": "moderate",
         "location": "Seri Iskandar",
-        "rating": 4.2,
-        "hours": "11am - 10pm",
+        "rating": 4.7,
+        "hours": "11am - 11pm",
         "description": "Traditional Yemeni-style nasi mandi and Arab dishes.",
-        "map_link": "https://www.google.com/maps/search/Restoran+Nasi+Arab+Sanaah+Seri+Iskandar"
+        "map_link": "https://maps.app.goo.gl/hg9w8dXKgGgm9UKL7"
     },
     {
         "name": "Syriano Restaurant",
@@ -167,21 +167,21 @@ RESTAURANTS = [
         "type": ["arab", "shawarma", "middle eastern"],
         "price": "moderate",
         "location": "Seri Iskandar",
-        "rating": 4.5,
-        "hours": "11am - 11pm",
+        "rating": 4.7,
+        "hours": "12pm - 10pm",
         "description": "Authentic Middle Eastern food with large portions.",
-        "map_link": "https://www.google.com/maps/search/Syriano+Restaurant+Seri+Iskandar"
+        "map_link": "https://maps.app.goo.gl/cybj6NCGJEcz1o3T7"
     },
     {
-        "name": "Nojoum Hadramout Restaurant",
+        "name": "Nojom Hadramout Restaurant",
         "cuisine": "arab",
         "type": ["arab", "mandi", "grill"],
         "price": "moderate",
         "location": "Seri Iskandar",
-        "rating": 4.4,
-        "hours": "11am - 11pm",
+        "rating": 4.5,
+        "hours": "12pm - 12am",
         "description": "Hadramaut cuisine featuring grilled meats and rice.",
-        "map_link": "https://www.google.com/maps/search/Nojoum+Hadramout+Restaurant+Seri+Iskandar"
+        "map_link": "https://maps.app.goo.gl/T75FmkGEBdDaZK9b6"
     },
 
     # ======================
@@ -191,23 +191,23 @@ RESTAURANTS = [
         "name": "The Black Caravan Seri Iskandar",
         "cuisine": "western",
         "type": ["western", "pasta", "fast food"],
-        "price": "moderate",
+        "price": "expensive",
         "location": "Seri Iskandar",
-        "rating": 4.2,
+        "rating": 4.4,
         "hours": "12pm - 11pm",
         "description": "Western casual dining with pastas and grilled items.",
-        "map_link": "https://www.google.com/maps/search/The+Black+Caravan+Seri+Iskandar"
+        "map_link": "https://maps.app.goo.gl/cEjS15mLsH6KZXsP9"
     },
     {
         "name": "Chegu' Cafe",
         "cuisine": "western",
         "type": ["cafe", "western", "dessert"],
-        "price": "moderate",
+        "price": "expensive",
         "location": "Seri Iskandar",
-        "rating": 4.0,
-        "hours": "10am - 10pm",
+        "rating": 4.4,
+        "hours": "3.30pm - 11.30pm",
         "description": "Cafe-style meals with western and fusion menu.",
-        "map_link": "https://www.google.com/maps/search/Chegu+Cafe+Seri+Iskandar"
+        "map_link": "https://maps.app.goo.gl/FQCNqrAGpYydPQfUA"
     },
     {
         "name": "Mastergrill SIBC Restaurant & Catering",
@@ -215,10 +215,10 @@ RESTAURANTS = [
         "type": ["grill", "steak", "western"],
         "price": "moderate",
         "location": "Seri Iskandar Business Centre",
-        "rating": 4.1,
-        "hours": "12pm - 10pm",
+        "rating": 3.8,
+        "hours": "12.30pm - 10.30pm",
         "description": "Grilled dishes and catering services for events.",
-        "map_link": "https://www.google.com/maps/search/Mastergrill+SIBC+Seri+Iskandar"
+        "map_link": "https://maps.app.goo.gl/qoheATa6wSQaFSqi8"
     },
     {
         "name": "Kampung Burger Seri Iskandar",
@@ -226,10 +226,10 @@ RESTAURANTS = [
         "type": ["burger", "street food", "western"],
         "price": "budget",
         "location": "Seri Iskandar",
-        "rating": 4.2,
-        "hours": "6pm - 12am",
+        "rating": 4.5,
+        "hours": "4pm - 12am",
         "description": "Local-style burger stall popular for supper.",
-        "map_link": "https://www.google.com/maps/search/Kampung+Burger+Seri+Iskandar"
+        "map_link": "https://maps.app.goo.gl/uRr7GBvHGT6PN9BBA"
     },
     {
         "name": "Kafe Cef Seri Iskandar",
@@ -237,13 +237,12 @@ RESTAURANTS = [
         "type": ["cafe", "western", "local fusion"],
         "price": "moderate",
         "location": "Seri Iskandar",
-        "rating": 4.0,
-        "hours": "10am - 10pm",
+        "rating": 4.9,
+        "hours": "4pm - 11pm",
         "description": "Relaxed cafe serving western and Malaysian fusion dishes.",
-        "map_link": "https://www.google.com/maps/search/Kafe+Cef+Seri+Iskandar"
+        "map_link": "https://maps.app.goo.gl/H7FkTCuSBvAwXn6L9"
     }
 ]
-
 
 # ==================== KEYWORD MAPPINGS ====================
 # These dictionaries map user words to our categories
