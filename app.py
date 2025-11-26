@@ -666,7 +666,12 @@ Combinations: "Cheap Malay food for breakfast"
 
 Just ask naturally and I'll recommend the best spots!
 """
-
+    
+    # typing....
+    with st.chat_message("assistant"):
+        with st.spinner("Finding the best food for you... 🍳"):
+            response = generate_response(prompt)
+        
     # extract user preferences and find matching restaurants
     prefs = extract_preferences(user_message)
     restaurants = find_restaurants(prefs)
@@ -994,11 +999,6 @@ if isinstance(spinning_choice, str):
     st.session_state.messages.append(
         {"role": "assistant", "content": message}
     )
-
-# typing....
-with st.chat_message("assistant"):
-    with st.spinner("Finding the best food for you... 🍳"):
-        response = generate_response(prompt)
 
 # back to top button
 st.markdown("""
