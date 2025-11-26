@@ -332,6 +332,127 @@ RESTAURANTS = [
         "hours": "5pm - 12am",
         "description": "Casual roadside tomyam, popular for supper among students.",
         "map_link": "https://maps.app.goo.gl/pATht7newd6AQimR6"
+    },
+
+    # Fast Food
+    {
+        "name": "Uncle Jack @ Seri Iskandar",
+        "cuisine": "fast food",
+        "type": ["fried chicken", "chicken", "local fast food"],
+        "price": "expensive",
+        "location": "Seri Iskandar",
+        "rating": 3.3,
+        "hours": "9am - 12am",
+        "map_link": "https://maps.app.goo.gl/tMRxtw3bCo89PXGs8",
+        "description": "Local fast food chain serving crispy fried chicken and side dishes."
+    },
+
+    {
+        "name": "D'Apple Fried Chicken - Seri Iskandar, Perak",
+        "cuisine": "fast food",
+        "type": ["fried chicken", "chicken", "local fast food"],
+        "price": "expensive",
+        "location": "Seri Iskandar",
+        "rating": 4.1,
+        "hours": "12.30pm - 10pm",
+        "map_link": "https://maps.app.goo.gl/fpApEu4XSTojJS1n9",
+        "description": "Affordable fried chicken popular among students."
+    },
+
+    {
+        "name": "Marrybrown Seri Iskandar",
+        "cuisine": "fast food",
+        "type": ["fried chicken", "burger", "rice"],
+        "price": "moderate",
+        "location": "Seri Iskandar",
+        "rating": 4.6,
+        "hours": "10am - 11pm",
+        "map_link": "https://maps.app.goo.gl/4A7ycSF5kqGWXPTG7",
+        "description": "Malaysian fast food chain offering chicken, burgers, and rice meals."
+    },
+
+    {
+        "name": "Hafiz Fried Chicken Seri Iskandar",
+        "cuisine": "fast food",
+        "type": ["fried chicken", "chicken", "budget food"],
+        "price": "expensive",
+        "location": "Seri Iskandar",
+        "rating": 3.5,
+        "hours": "10am - 11pm",
+        "map_link": "https://maps.app.goo.gl/7rUtZaKUVTHK9SFSA",
+        "description": "Simple and budget-friendly fried chicken spot."
+    },
+
+    {
+        "name": "A&W Seri Iskandar",
+        "cuisine": "fast food",
+        "type": ["burger", "fast food", "chicken", "root beer"],
+        "price": "expensive",
+        "location": "Seri Iskandar",
+        "rating": 4.6,
+        "hours": "10am - 10pm",
+        "map_link": "https://maps.app.goo.gl/xv6vpMG5AcNbPuC7A",
+        "description": "Classic A&W burgers, fried chicken, and root beer."
+    },
+
+    {
+        "name": "McDonald's Seri Iskandar DT",
+        "cuisine": "fast food",
+        "type": ["burger", "fried chicken", "breakfast", "drive thru"],
+        "price": "expensive",
+        "location": "Seri Iskandar",
+        "rating": 4.0,
+        "hours": "9am - 12am",
+        "map_link": "https://maps.app.goo.gl/7rn4L1r99MAXJZqS7",
+        "description": "International fast food chain with drive-thru."
+    },
+
+    {
+        "name": "KFC Seri Iskandar Drive Thru",
+        "cuisine": "fast food",
+        "type": ["fried chicken", "chicken", "drive thru"],
+        "price": "expensive",
+        "location": "Seri Iskandar",
+        "rating": 3.4,
+        "hours": "10am - 12am",
+        "map_link": "https://maps.app.goo.gl/NDxwLZrHQkuvZ2f99",
+        "description": "Famous for fried chicken with quick drive-thru service."
+    },
+
+    {
+        "name": "Subway Seri Iskandar",
+        "cuisine": "fast food",
+        "type": ["sandwich", "healthy", "fast food"],
+        "price": "moderate",
+        "location": "Seri Iskandar",
+        "rating": 4.4,
+        "hours": "8am - 10pm",
+        "map_link": "https://maps.app.goo.gl/k9M9J4jTkRe15hUMA",
+        "description": "Customizable sandwiches and wraps."
+    },
+
+    {
+        "name": "Domino's Seri Iskandar",
+        "cuisine": "fast food",
+        "type": ["pizza", "delivery", "fast food"],
+        "price": "expensive",
+        "location": "Seri Iskandar",
+        "rating": 4.1,
+        "hours": "10.30am - 11pm",
+        "map_link": "https://maps.app.goo.gl/Yhrq5M7LSQCzmXks9",
+        "description": "Pizza delivery and takeaway with regular promotions."
+    },
+
+    {
+        "name": "Pizza Hut Delivery Sri Iskandar",
+        "cuisine": "fast food",
+        "type": ["pizza", "delivery", "pasta"],
+        "price": "expensive",
+        "location": "Seri Iskandar",
+        "rating": 3.6,
+        "hours": "10am - 11pm",
+        "map_link": "https://maps.app.goo.gl/fpk5utPfqxQukbhS6",
+        "description": "Popular pizza chain offering dine-in and delivery options."
     }
 ]
 
@@ -345,6 +466,7 @@ CUISINE_KEYWORDS = {
     "western": ["western", "cafe", "pasta", "burger"],  # Western food
     "arab": ["arab", "middle eastern", "nasi arab"],  # Arab food
     "thai": ["thai", "tomyam", "tom yam", "ala thai"] # Thai Food
+    "fast food" : [ "fast food", "burger", "fried chicken", "kfc", "mcd", "mcdonald", "pizza", "dominos", "subway", "marrybrown"]
 }
 
 # maps based on budget
@@ -371,6 +493,14 @@ FOOD_TYPE_KEYWORDS = {
     "burger": ["burger", "hamburger", "cheeseburger"],
     "pasta": ["pasta", "spaghetti", "carbonara", "bolognese", "macaroni"],
     "grill": ["grill", "grilled", "steak", "lamb chop", "chicken chop"]
+    "fast food": ["fast food", "quick meal", "express food"]
+    "fried chicken": ["fried chicken", "ayam goreng", "crispy chicken", "kfc", "mcd", "mcdonald", "marrybrown", "uncle jack", "d'apple", "hafiz fried chicken"],
+    "burger": ["burger", "hamburger", "cheeseburger", "mcchicken", "big mac", "double cheese"],
+    "pizza": ["pizza", "domino", "dominos", "pizza hut", "pepperoni", "hawaiian", "super supreme"],
+    "sandwich": ["sandwich", "sub", "subway", "wrap"],
+    "drive thru": ["drive thru", "drive-thru", "dt"],
+    "delivery": ["delivery", "food delivery", "takeaway"],
+    "breakfast fast food": ["fast food breakfast", "mcd breakfast", "sausage mcmuffin", "hash brown"]
 }
 
 # AI FUNCTIONS
