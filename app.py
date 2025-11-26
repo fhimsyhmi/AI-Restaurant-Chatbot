@@ -253,10 +253,10 @@ RESTAURANTS = [
         "type": ["tomyam", "thai", "seafood"],
         "price": "budget",
         "location": "Seri Iskandar",
-        "rating": 4.1,
+        "rating": 2.5,
         "hours": "4pm - 12am",
         "description": "Popular late-night tomyam spot with Thai-style seafood dishes.",
-        "map_link": "https://www.google.com/maps/search/Pak+Ngah+Tomyam+Seri+Iskandar"
+        "map_link": "https://maps.app.goo.gl/yUtS5ftXKqjSW3fr5"
     },
     {
         "name": "Utama Tomyam Seafood",
@@ -265,9 +265,9 @@ RESTAURANTS = [
         "price": "budget",
         "location": "Seri Iskandar",
         "rating": 4.0,
-        "hours": "4pm - 1am",
+        "hours": "11pm - 2.30am",
         "description": "Thai seafood tomyam with wide variety of lauk goreng.",
-        "map_link": "https://www.google.com/maps/search/Utama+Tomyam+Seafood+Seri+Iskandar"
+        "map_link": "https://maps.app.goo.gl/8rB5oQAnSoQrhKXg9"
     },
     {
         "name": "D'Asean Ala Thai Seafood",
@@ -275,10 +275,10 @@ RESTAURANTS = [
         "type": ["thai", "seafood", "tomyam"],
         "price": "moderate",
         "location": "Seri Iskandar",
-        "rating": 4.2,
-        "hours": "5pm - 12am",
+        "rating": 3.4,
+        "hours": "4pm - 3am",
         "description": "Asean-style Thai seafood with nicer ambience for group dining.",
-        "map_link": "https://www.google.com/maps/search/D+Asean+Ala+Thai+Seafood+Seri+Iskandar"
+        "map_link": "https://maps.app.goo.gl/c2NdA6iiY9ivbYjy5"
     },
     {
         "name": "Farhan Tomyam Restaurant",
@@ -286,10 +286,10 @@ RESTAURANTS = [
         "type": ["tomyam", "thai", "seafood"],
         "price": "budget",
         "location": "Seri Iskandar",
-        "rating": 4.0,
-        "hours": "4pm - 12am",
+        "rating": 3.3,
+        "hours": "12pm - 3am",
         "description": "Simple tomyam stall serving classic Thai dishes with fast service.",
-        "map_link": "https://www.google.com/maps/search/Farhan+Tomyam+Restaurant+Seri+Iskandar"
+        "map_link": "https://maps.app.goo.gl/FYhTEVTGSRxF5nBd6"
     },
     {
         "name": "Arif Tomyam",
@@ -297,10 +297,10 @@ RESTAURANTS = [
         "type": ["tomyam", "thai", "seafood"],
         "price": "budget",
         "location": "Bandar Universiti",
-        "rating": 4.0,
-        "hours": "5pm - 12am",
+        "rating": 3.6,
+        "hours": "3pm - 2am",
         "description": "Comfort tomyam place near student area, good for supper.",
-        "map_link": "https://www.google.com/maps/search/Arif+Tomyam+Bandar+Universiti"
+        "map_link": "https://maps.app.goo.gl/DUAU7r5LXaFnT9hNA"
     },
     {
         "name": "D'Krabi Tomyam Classic",
@@ -308,10 +308,10 @@ RESTAURANTS = [
         "type": ["tomyam", "thai", "seafood"],
         "price": "moderate",
         "location": "Seri Iskandar",
-        "rating": 4.3,
+        "rating": 2.9,
         "hours": "5pm - 1am",
         "description": "Thai-inspired tomyam with richer flavours and seafood variety.",
-        "map_link": "https://www.google.com/maps/search/D+Krabi+Tomyam+Classic+Seri+Iskandar+Perak"
+        "map_link": "https://maps.app.goo.gl/jYfp1PiJLuze7VAe9"
     },
     {
         "name": "Krua Thai Tomyam",
@@ -319,10 +319,10 @@ RESTAURANTS = [
         "type": ["thai", "tomyam", "rice"],
         "price": "moderate",
         "location": "Seri Iskandar",
-        "rating": 4.2,
-        "hours": "11am - 10pm",
+        "rating": 2.9,
+        "hours": "4.30pm - 3am",
         "description": "Thai home-style cooking with tomyam and rice-based dishes.",
-        "map_link": "https://www.google.com/maps/search/Krua+Thai+Tomyam+Seri+Iskandar"
+        "map_link": "https://maps.app.goo.gl/7CHsRXie8n24FpCF6"
     },
     {
         "name": "Farisha Tomyam Kung",
@@ -330,10 +330,10 @@ RESTAURANTS = [
         "type": ["tomyam", "seafood", "thai"],
         "price": "budget",
         "location": "Seri Iskandar",
-        "rating": 4.0,
-        "hours": "4pm - 12am",
+        "rating": 4.5,
+        "hours": "5.10pm - 12am",
         "description": "Tomyam kung seafood with strong spicy and sour flavours.",
-        "map_link": "https://www.google.com/maps/search/Farisha+Tomyam+Kung+Seri+Iskandar"
+        "map_link": "https://maps.app.goo.gl/X12mhaft1prSPiCP9"
     },
     {
         "name": "Nik Tomyam",
@@ -341,10 +341,10 @@ RESTAURANTS = [
         "type": ["tomyam", "thai", "seafood"],
         "price": "budget",
         "location": "Seri Iskandar",
-        "rating": 4.1,
+        "rating": 2.9,
         "hours": "5pm - 12am",
         "description": "Casual roadside tomyam, popular for supper among students.",
-        "map_link": "https://www.google.com/maps/search/Nik+Tomyam+Seri+Iskandar"
+        "map_link": "https://maps.app.goo.gl/pATht7newd6AQimR6"
     }
 ]
 
