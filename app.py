@@ -355,10 +355,10 @@ RESTAURANTS = [
 # Maps various ways users might say cuisine types to our standard categories
 CUISINE_KEYWORDS = {
     "malay": ["malay", "melayu", "local", "kampung", "traditional"],  # If user types any of these words, we know they want Malay food
-    "chinese": ["chinese", "cina", "oriental"],  # Chinese food keywords
     "indian": ["indian", "mamak", "india"],  # Indian food keywords
     "western": ["western", "cafe", "pasta", "burger"],  # Western food keywords
     "arab": ["arab", "middle eastern", "nasi arab"]  # Arab food keywords
+    "thai": ["thai", "tomyam", "tom yam", "ala thai"]
 }
 
 # Maps various ways users might describe their budget to our price categories
@@ -377,6 +377,9 @@ FOOD_TYPE_KEYWORDS = {
     "chicken rice": ["chicken rice", "nasi ayam"],  # Chicken rice specific
     "roti canai": ["roti canai", "roti", "canai"],  # Roti canai specific
     "nasi kandar": ["nasi kandar", "kandar"]  # Nasi kandar specific
+    "tomyam": ["tomyam", "tom yam", "thai soup"],
+    "thai seafood": ["thai seafood", "tomyam seafood", "seafood tomyam"],
+    "thai rice": ["thai rice", "thai fried rice", "nasi goreng thai"]
 }
 
 # ==================== AI FUNCTIONS ====================
