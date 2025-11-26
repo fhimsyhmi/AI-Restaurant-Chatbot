@@ -555,7 +555,7 @@ st.markdown("""
     
     /* Sidebar with glass effect */
     section[data-testid="stSidebar"] {
-        background: rgba(15, 52, 96, 0.85) !important;
+        background: rgba(15, 52, 96, 0.65) !important;
         backdrop-filter: blur(15px);
     }
     
