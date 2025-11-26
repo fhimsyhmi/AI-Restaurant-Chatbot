@@ -2,8 +2,7 @@
 import streamlit as st
 
 # RESTAURANT DATABASE
-# main data source - restaurant information
-
+# main data source, restaurant information
 RESTAURANTS = [
 
     # MALAY
