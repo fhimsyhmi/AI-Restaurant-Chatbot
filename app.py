@@ -465,7 +465,7 @@ CUISINE_KEYWORDS = {
     "indian": ["indian", "mamak", "india"],  # Indian food
     "western": ["western", "cafe", "pasta", "burger"],  # Western food
     "arab": ["arab", "middle eastern", "nasi arab"],  # Arab food
-    "thai": ["thai", "tomyam", "tom yam", "ala thai"] # Thai Food
+    "thai": ["thai", "tomyam", "tom yam", "ala thai"], # Thai Food
     "fast food" : [ "fast food", "burger", "fried chicken", "kfc", "mcd", "mcdonald", "pizza", "dominos", "subway", "marrybrown"]
 }
 
