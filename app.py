@@ -492,8 +492,8 @@ FOOD_TYPE_KEYWORDS = {
     "arab rice": ["nasi arab", "mandi", "kabsah","kabsa", "biryani arab"],
     "burger": ["burger", "hamburger", "cheeseburger"],
     "pasta": ["pasta", "spaghetti", "carbonara", "bolognese", "macaroni"],
-    "grill": ["grill", "grilled", "steak", "lamb chop", "chicken chop"]
-    "fast food": ["fast food", "quick meal", "express food"]
+    "grill": ["grill", "grilled", "steak", "lamb chop", "chicken chop"],
+    "fast food": ["fast food", "quick meal", "express food"],
     "fried chicken": ["fried chicken", "ayam goreng", "crispy chicken", "kfc", "mcd", "mcdonald", "marrybrown", "uncle jack", "d'apple", "hafiz fried chicken"],
     "burger": ["burger", "hamburger", "cheeseburger", "mcchicken", "big mac", "double cheese"],
     "pizza": ["pizza", "domino", "dominos", "pizza hut", "pepperoni", "hawaiian", "super supreme"],
