@@ -399,22 +399,12 @@ def format_restaurant(r):
 """
 
 def generate_response(user_message):
-    """
-    Generate the chatbot's response based on what the user typed.
-    This is the main "brain" function that decides what to say.
+    """Generate chatbot response based on user message."""
+    msg_lower = user_message.lower()
     
-    Parameters:
-        user_message (str): The message typed by the user
-        
-    Returns:
-        str: The chatbot's response text
-    """
-    msg_lower = user_message.lower()  # Convert to lowercase for easier checking
-    
-    # Check if user is greeting the bot
+    # Handle greetings
     greetings = ["hi", "hello", "hey", "assalamualaikum", "hai"]
     if any(g in msg_lower for g in greetings):
-        # Return welcome message with instructions
         return """Hello! 👋 Welcome to the Seri Iskandar Restaurant Recommender!
 
 I can help you find great places to eat. Just tell me:
@@ -426,9 +416,8 @@ I can help you find great places to eat. Just tell me:
 For example: "I want cheap Malay food" or "Any good cafe nearby?"
 """
 
-    # Check if user is asking for help
+    # Handle help requests
     if any(h in msg_lower for h in ["help", "how", "what can"]):
-        # Return help instructions
         return """Here's how I can help you:
 
 🍜 **Find by cuisine**: "Show me Chinese restaurants"
@@ -440,24 +429,30 @@ For example: "I want cheap Malay food" or "Any good cafe nearby?"
 Just ask naturally and I'll recommend the best spots!
 """
 
-    # If not greeting or help, treat as a restaurant search query
-    prefs = extract_preferences(user_message)  # Extract what user wants
-    restaurants = find_restaurants(prefs)  # Find matching restaurants
+    # Extract user preferences and find matching restaurants
+    prefs = extract_preferences(user_message)
+    restaurants = find_restaurants(prefs)
     
-    # If no restaurants found, apologize
+    # If no matches found
     if not restaurants:
         return "Sorry, I couldn't find any restaurants matching your criteria. Try being less specific or ask for different options!"
     
-    # Build response with restaurant recommendations
-    response = "### 🍴 Here are my recommendations:\n\n"
+    # Build response header based on number of results
+    if len(restaurants) == 1:
+        response = "### 🍴 Here is my recommendation:\n\n"
+    else:
+        response = f"### 🍴 Here are my top {len(restaurants)} recommendations:\n\n"
     
-    # Show top 3 restaurants
-    for r in restaurants[:3]:
-        response += format_restaurant(r)  # Add formatted restaurant card
+    # Display ALL restaurants found (no limit!)
+    for r in restaurants:
+        response += format_restaurant(r)
     
-    # If more than 3 matches, tell user there are more options
-    if len(restaurants) > 3:
-        response += f"\n\n_I found {len(restaurants)} matches. Want to see more options?_"
+    # Add footer message
+    if len(restaurants) == 1:
+        response += "\n\n✅ _This is the best match for your preferences!_"
+    else:
+        response += f"\n\n✅ _Found {len(restaurants)} restaurant(s) matching your preferences. "
+        response += "They're ranked by how well they match what you're looking for!_"
     
     return response
 
