@@ -635,12 +635,7 @@ def format_restaurant(r):
 </div>
 """
 
-# chatbot
-# typing....
-with st.chat_message("assistant"):
-    with st.spinner("Finding the best food for you... 🍳"):
-        response = generate_response(prompt)
-        
+# chatbot        
 def generate_response(user_message):
     """Generate chatbot response based on user message."""
     msg_lower = user_message.lower()
