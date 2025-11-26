@@ -1,15 +1,12 @@
-# Import the Streamlit library - this is what creates the web interface
+# Import the Streamlit library
 import streamlit as st
 
-# ==================== RESTAURANT DATABASE ====================
-# This is our main data source - a list of dictionaries containing restaurant information
-# Each restaurant is a dictionary with details like name, cuisine, price, etc.
+# RESTAURANT DATABASE
+# main data source - restaurant information
 
 RESTAURANTS = [
 
-    # ======================
     # MALAY
-    # ======================
     {
         "name": "Little Ipoh Cafe",
         "cuisine": "malay",
@@ -99,9 +96,7 @@ RESTAURANTS = [
         "map_link": "https://maps.app.goo.gl/vSMpTdcwbw4HX5Qa7"
     },
 
-    # ======================
-    # INDIAN / MAMAK
-    # ======================
+    # MAMAK
     {
         "name": "Rahman Corner",
         "cuisine": "indian",
@@ -147,9 +142,7 @@ RESTAURANTS = [
         "map_link": "https://maps.app.goo.gl/xz8eK1dNY6hqze8M7"
     },
 
-    # ======================
     # ARAB
-    # ======================
     {
         "name": "Restoran Nasi Arab Sana'a",
         "cuisine": "arab",
@@ -158,7 +151,7 @@ RESTAURANTS = [
         "location": "Seri Iskandar",
         "rating": 4.7,
         "hours": "11am - 11pm",
-        "description": "Traditional Yemeni-style nasi mandi and Arab dishes.",
+        "description": "Traditional Yemen-style nasi mandi and Arab dishes.",
         "map_link": "https://maps.app.goo.gl/hg9w8dXKgGgm9UKL7"
     },
     {
@@ -184,9 +177,7 @@ RESTAURANTS = [
         "map_link": "https://maps.app.goo.gl/T75FmkGEBdDaZK9b6"
     },
 
-    # ======================
     # WESTERN
-    # ======================
     {
         "name": "The Black Caravan Seri Iskandar",
         "cuisine": "western",
@@ -243,10 +234,7 @@ RESTAURANTS = [
         "map_link": "https://maps.app.goo.gl/H7FkTCuSBvAwXn6L9"
     },
 
-    # ======================
     # THAI
-    # ======================
-
     {
         "name": "Pak Ngah Tomyam",
         "cuisine": "thai",
@@ -266,7 +254,7 @@ RESTAURANTS = [
         "location": "Seri Iskandar",
         "rating": 4.0,
         "hours": "11pm - 2.30am",
-        "description": "Thai seafood tomyam with wide variety of lauk goreng.",
+        "description": "Thai seafood tomyam with wide variety of makanan goreng.",
         "map_link": "https://maps.app.goo.gl/8rB5oQAnSoQrhKXg9"
     },
     {
@@ -348,41 +336,45 @@ RESTAURANTS = [
     }
 ]
 
-# ==================== KEYWORD MAPPINGS ====================
-# These dictionaries map user words to our categories
-# This is the "AI brain" - it understands what users mean when they type different words
+# KEYWORD MAPPINGS
+# map user words to our categories, understands what users mean when type different words
 
-# Maps various ways users might say cuisine types to our standard categories
+#maps based on category
 CUISINE_KEYWORDS = {
-    "malay": ["malay", "melayu", "local", "kampung", "traditional"],  # If user types any of these words, we know they want Malay food
-    "indian": ["indian", "mamak", "india"],  # Indian food keywords
-    "western": ["western", "cafe", "pasta", "burger"],  # Western food keywords
-    "arab": ["arab", "middle eastern", "nasi arab"],  # Arab food keywords
-    "thai": ["thai", "tomyam", "tom yam", "ala thai"]
+    "malay": ["malay", "melayu", "local", "kampung", "traditional"],  # Malay food
+    "indian": ["indian", "mamak", "india"],  # Indian food
+    "western": ["western", "cafe", "pasta", "burger"],  # Western food
+    "arab": ["arab", "middle eastern", "nasi arab"],  # Arab food
+    "thai": ["thai", "tomyam", "tom yam", "ala thai"] # Thai Food
 }
 
-# Maps various ways users might describe their budget to our price categories
+# maps based on budget
 PRICE_KEYWORDS = {
-    "budget": ["cheap", "budget", "murah", "affordable", "low price"],  # Budget-friendly keywords
-    "moderate": ["moderate", "medium", "sederhana", "reasonable"],  # Mid-range keywords
-    "expensive": ["expensive", "mahal", "fancy", "high end", "premium"]  # Expensive keywords
+    "budget": ["cheap", "budget", "murah", "affordable", "low price"],  # Budget 
+    "moderate": ["moderate", "medium", "sederhana", "reasonable"],  # Moderate 
+    "expensive": ["expensive", "mahal", "fancy", "high end", "premium"]  # Expensive 
 }
 
-# Maps food types users might search for
+# maps food types
 FOOD_TYPE_KEYWORDS = {
-    "rice": ["rice", "nasi", "nasi campur", "nasi kandar"],  # Rice-based dishes
-    "seafood": ["seafood", "fish", "prawn", "sotong", "ikan"],  # Seafood keywords
-    "breakfast": ["breakfast", "sarapan", "morning", "roti canai"],  # Breakfast keywords
-    "coffee": ["coffee", "kopi", "cafe", "latte"],  # Coffee/cafe keywords
-    "chicken rice": ["chicken rice", "nasi ayam"],  # Chicken rice specific
-    "roti canai": ["roti canai", "roti", "canai"],  # Roti canai specific
-    "nasi kandar": ["nasi kandar", "kandar"],  # Nasi kandar specific
-    "tomyam": ["tomyam", "tom yam", "thai soup"],
-    "thai seafood": ["thai seafood", "tomyam seafood", "seafood tomyam"],
-    "thai rice": ["thai rice", "thai fried rice", "nasi goreng thai"]
+    "rice": ["rice", "nasi", "nasi campur", "nasi kandar", "nasi lemak", "nasi goreng", "fried rice"],
+    "seafood": ["seafood", "ikan", "fish", "prawn", "udang", "squid", "sotong", "cuttlefish", "crab", "ketam"],
+    "breakfast": ["breakfast", "sarapan", "morning", "roti canai", "roti telur", "roti planta", "nasi lemak pagi"],
+    "coffee": ["coffee", "kopi", "cafe", "latte", "espresso", "americano", "teh", "tea"],
+    "chicken": ["chicken", "ayam", "ayam goreng", "fried chicken"],
+    "chicken rice": ["chicken rice", "nasi ayam", "ayam kukus", "roasted chicken"],
+    "roti canai": ["roti canai", "roti", "canai", "roti telur", "roti bom"],
+    "nasi kandar": ["nasi kandar", "kandar", "banjir", "kuah campur"],
+    "mamak": ["mamak", "india muslim", "Indian Muslim", "tosei", "thosai", "capati"],
+    "tomyam": ["tomyam", "tom yam", "thai soup", "tomyum", "tom yum"],
+    "thai seafood": ["thai seafood", "tomyam seafood","seafood tomyam", "ikan stim limau"],
+    "arab rice": ["nasi arab", "mandi", "kabsah","kabsa", "biryani arab"],
+    "burger": ["burger", "hamburger", "cheeseburger"],
+    "pasta": ["pasta", "spaghetti", "carbonara", "bolognese", "macaroni"],
+    "grill": ["grill", "grilled", "steak", "lamb chop", "chicken chop"]
 }
 
-# ==================== AI FUNCTIONS ====================
+# AI FUNCTIONS
 # These are the core functions that make the chatbot "intelligent"
 
 def extract_preferences(message):
