@@ -824,7 +824,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.title("🍽️ Seri Iskandar Restaurant Bot")
+st.title("🍽️ SI Foodie")
 
 # Custom color
 st.markdown(
