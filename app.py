@@ -960,7 +960,7 @@ def spinning_wheel(restaurants):
                 ctx.textAlign = "right";
                 ctx.fillStyle = "#fff";
                 ctx.font = "12px Arial";
-                ctx.fillText(item, radius - 90, 5);
+                ctx.fillText(item, radius - 5, 5);
                 ctx.restore();
             }});
         }}
