@@ -892,122 +892,275 @@ with st.sidebar:
     st.code("Western food cafe", language=None)
     
     st.divider()
-def spinning_wheel(restaurants):
-    names = [r["name"] for r in restaurants]
+# Add this import at the top of your app.py (with other imports)
 
+# ... (rest of your code) ...
+
+def spinning_wheel(restaurants):
+    """Create a spinning wheel for restaurant selection with clean, readable text"""
+    
+    # Shorten restaurant names to fit better on the wheel
+    def shorten_name(name):
+        # Remove common words and keep it short
+        name = name.replace("Restoran", "").replace("Kedai Makan", "")
+        name = name.replace("Cafe", "").strip()
+        # Limit to 20 characters
+        if len(name) > 20:
+            name = name[:17] + "..."
+        return name
+    
+    # Create shortened names for display
+    display_names = [shorten_name(r["name"]) for r in restaurants]
+    full_names = [r["name"] for r in restaurants]
+    
     html = f"""
     <html>
     <head>
     <style>
+        body {{
+            margin: 0;
+            padding: 20px;
+            background: transparent;
+        }}
+        #wheelContainer {{
+            position: relative;
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+        }}
         canvas {{
             background: transparent;
-            margin: auto;
             display: block;
         }}
-        button {{
+        #pointer {{
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 25px solid #e94560;
+            z-index: 10;
+        }}
+        .center-circle {{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
             background: #e94560;
+            border-radius: 50%;
+            border: 4px solid white;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }}
+        button {{
+            background: linear-gradient(135deg, #e94560, #ff6b6b);
             color: white;
             border: none;
-            padding: 10px 25px;
-            border-radius: 20px;
+            padding: 12px 30px;
+            border-radius: 25px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 18px;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(233, 69, 96, 0.4);
+            transition: transform 0.2s;
+        }}
+        button:hover {{
+            transform: scale(1.05);
+        }}
+        button:active {{
+            transform: scale(0.95);
+        }}
+        button:disabled {{
+            background: #666;
+            cursor: not-allowed;
+            transform: scale(1);
+        }}
+        #result {{
+            color: white;
+            font-size: 20px;
             margin-top: 15px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }}
+        .controls {{
+            text-align: center;
         }}
     </style>
     </head>
     <body>
-
-    <canvas id="wheel" width="350" height="350"></canvas>
-    <div style="text-align:center">
-        <button onclick="spin()">🎡 Spin the Wheel</button>
-        <p id="result" style="color:white;font-size:18px;margin-top:10px;"></p>
+    <div id="wheelContainer">
+        <div id="pointer"></div>
+        <canvas id="wheel" width="400" height="400"></canvas>
+        <div class="center-circle">🍽️</div>
     </div>
-
+    <div class="controls">
+        <button id="spinBtn" onclick="spin()">🎡 Spin the Wheel!</button>
+        <p id="result"></p>
+    </div>
     <script>
-        const items = {json.dumps(names)};
+        const displayNames = {json.dumps(display_names)};
+        const fullNames = {json.dumps(full_names)};
         const canvas = document.getElementById("wheel");
         const ctx = canvas.getContext("2d");
         const radius = canvas.width / 2;
         let angle = 0;
         let spinning = false;
-
+        
+        // Colors for each slice
+        const colors = ["#1f4068", "#162447", "#1b3a5f", "#1a3552", "#1e4570"];
+        
         function drawWheel() {{
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            items.forEach((item, i) => {{
-                const slice = 2 * Math.PI / items.length;
+            const sliceAngle = 2 * Math.PI / displayNames.length;
+            
+            displayNames.forEach((item, i) => {{
+                // Draw slice
                 ctx.beginPath();
                 ctx.moveTo(radius, radius);
-                ctx.arc(radius, radius, radius, i * slice + angle, (i + 1) * slice + angle);
-                ctx.fillStyle = i % 2 === 0 ? "#1f4068" : "#162447";
+                ctx.arc(
+                    radius, 
+                    radius, 
+                    radius - 30, // Smaller radius to leave space for center
+                    i * sliceAngle + angle, 
+                    (i + 1) * sliceAngle + angle
+                );
+                ctx.fillStyle = colors[i % colors.length];
                 ctx.fill();
+                
+                // Draw border
+                ctx.strokeStyle = "#fff";
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                
+                // Draw text
                 ctx.save();
                 ctx.translate(radius, radius);
-                ctx.rotate(i * slice + slice / 2 + angle);
-                ctx.textAlign = "right";
+                ctx.rotate(i * sliceAngle + sliceAngle / 2 + angle);
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
                 ctx.fillStyle = "#fff";
-                ctx.font = "14px Arial";
-                ctx.fillText(item, radius - 10, 5);
+                ctx.font = "bold 13px Arial";
+                
+                // Draw text at optimal distance from center
+                const textRadius = radius - 90;
+                ctx.fillText(item, textRadius, 0);
+                
                 ctx.restore();
             }});
         }}
-
+        
         function spin() {{
             if (spinning) return;
+            
             spinning = true;
-            let speed = Math.random() * 0.4 + 0.25;
-            let decel = 0.985;
-
+            document.getElementById("spinBtn").disabled = true;
+            document.getElementById("result").innerText = "";
+            
+            // Random spin: 5-8 full rotations + random position
+            const minRotations = 5;
+            const maxRotations = 8;
+            const rotations = Math.random() * (maxRotations - minRotations) + minRotations;
+            const targetAngle = rotations * 2 * Math.PI + Math.random() * 2 * Math.PI;
+            
+            const duration = 4000; // 4 seconds
+            const startTime = Date.now();
+            const startAngle = angle;
+            
             function animate() {{
-                speed *= decel;
-                angle += speed;
+                const elapsed = Date.now() - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                // Easing function for smooth deceleration
+                const easeOut = 1 - Math.pow(1 - progress, 3);
+                
+                angle = startAngle + targetAngle * easeOut;
                 drawWheel();
-
-                if (speed < 0.002) {{
-                    spinning = false;
-                    const slice = 2 * Math.PI / items.length;
-                    const index = Math.floor(((2 * Math.PI - angle % (2 * Math.PI)) / slice)) % items.length;
-                    const picked = items[index];
-                    document.getElementById("result").innerText = "🎉 You got: " + picked;
-
-                    window.parent.postMessage(picked, "*");
-                }} else {{
+                
+                if (progress < 1) {{
                     requestAnimationFrame(animate);
+                }} else {{
+                    spinning = false;
+                    document.getElementById("spinBtn").disabled = false;
+                    
+                    // Calculate winner
+                    const sliceAngle = 2 * Math.PI / displayNames.length;
+                    const normalizedAngle = (2 * Math.PI - (angle % (2 * Math.PI))) % (2 * Math.PI);
+                    const index = Math.floor(normalizedAngle / sliceAngle) % displayNames.length;
+                    const picked = fullNames[index];
+                    
+                    document.getElementById("result").innerText = "🎉 " + picked + "!";
+                    
+                    // Send result to parent (Streamlit)
+                    window.parent.postMessage({{type: 'streamlit:setComponentValue', value: picked}}, "*");
                 }}
             }}
+            
             animate();
         }}
-
+        
+        // Initial draw
         drawWheel();
     </script>
-
     </body>
     </html>
     """
-
-    choice = components.html(html, height=500)
+    
+    choice = components.html(html, height=550)
     return choice
 
+# ... (rest of your code) ...
+
+# Add this in the sidebar section (replace your old spinning wheel code)
 with st.sidebar:
     st.divider()
     st.header("🎡 Feeling Indecisive?")
+    st.caption("Let the wheel decide for you!")
+    
+    # Create the spinning wheel
     spinning_choice = spinning_wheel(RESTAURANTS)
+    
+    # Handle wheel result
+    if spinning_choice:
+        # Find the restaurant by name
+        try:
+            picked = next(r for r in RESTAURANTS if r["name"] == spinning_choice)
+            
+            # Format the result message
+            price_emoji = {"budget": "💰", "moderate": "💰💰", "expensive": "💰💰💰"}
+            stars = "⭐" * int(picked['rating'])
+            
+            result_message = f"""
+🎯 **The Wheel Has Spoken!** 🎯
 
-if isinstance(spinning_choice, str):
-    picked = next(r for r in RESTAURANTS if r["name"] == spinning_choice)
+**{picked['name']}**
 
-    message = f"""
-🎯 **Wheel Result!** 🎯  
+{stars} ({picked['rating']})
+🍽️ Cuisine: {picked['cuisine'].title()}
+{price_emoji.get(picked['price'], '💰')} Price: {picked['price'].title()}
+📍 Location: {picked['location']}
+🕐 Hours: {picked['hours']}
 
-🍽️ **{picked['name']}**  
-🍴 {picked['cuisine'].title()}  
-⭐ Rating: {picked['rating']}  
-💰 {picked['price'].title()}  
-📍 {picked['location']}  
+📝 {picked['description']}
 
-👉 [View on Google Maps]({picked['map_link']})
-    """
-
-    st.session_state.messages.append(
-        {"role": "assistant", "content": message}
-    )
+_Give it a try!_ 🍴
+"""
+            
+            # Add to chat history
+            st.session_state.messages.append({
+                "role": "assistant", 
+                "content": result_message
+            })
+            
+            # Force refresh to show in chat
+            st.rerun()
+            
+        except StopIteration:
+            st.error("Restaurant not found!")
