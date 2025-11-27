@@ -691,10 +691,10 @@ Just ask naturally and I'll recommend the best spots!
         response += "They're ranked by how well they match what you're looking for!_"
     
     return response
-#SPINNING WHEEL SECTION
+    #SPINNING WHEEL SECTION
     def spinning_wheel(restaurants):
     
- def shorten_name(name):
+    def shorten_name(name):
         name = name.replace("Restoran", "").replace("Kedai Makan", "")
         name = name.replace("Cafe", "").strip()
         if len(name) > 20:
