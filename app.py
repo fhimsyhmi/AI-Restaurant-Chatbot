@@ -753,9 +753,9 @@ st.markdown("""
     /* Subtitle */
     .stCaption {
         text-align: center;
-        color: #ff7a7a !important;
+        color: #ff7a7a !important;  /* light red */
         font-size: 1.1rem !important;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1); 
     }
     
     /* Chat messages with blur effect */
