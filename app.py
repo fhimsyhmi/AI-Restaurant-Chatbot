@@ -33,7 +33,7 @@ RESTAURANTS = [
         "map_link": "https://maps.app.goo.gl/PwZSQrYUnveE3rbU6"
     },
     {
-        "name": "Restoran Bunda Seri Iskandar",
+        "name": "Restoran Bunda SI",
         "cuisine": "malay",
         "type": ["local", "nasi campur", "home-style"],
         "price": "budget",
@@ -182,7 +182,7 @@ RESTAURANTS = [
 
     # WESTERN
     {
-        "name": "The Black Caravan Seri Iskandar",
+        "name": "The Black Caravan SI",
         "cuisine": "western",
         "type": ["western", "pasta", "fast food"],
         "price": "expensive",
@@ -204,7 +204,7 @@ RESTAURANTS = [
         "map_link": "https://maps.app.goo.gl/FQCNqrAGpYydPQfUA"
     },
     {
-        "name": "Mastergrill SIBC Restaurant & Catering",
+        "name": "Mastergrill SI",
         "cuisine": "western",
         "type": ["grill", "steak", "western"],
         "price": "moderate",
@@ -215,7 +215,7 @@ RESTAURANTS = [
         "map_link": "https://maps.app.goo.gl/qoheATa6wSQaFSqi8"
     },
     {
-        "name": "Kampung Burger Seri Iskandar",
+        "name": "Kampung Burger SI",
         "cuisine": "western",
         "type": ["burger", "street food", "western"],
         "price": "budget",
@@ -226,7 +226,7 @@ RESTAURANTS = [
         "map_link": "https://maps.app.goo.gl/uRr7GBvHGT6PN9BBA"
     },
     {
-        "name": "Kafe Cef Seri Iskandar",
+        "name": "Kafe Cef SI",
         "cuisine": "western",
         "type": ["cafe", "western", "local fusion"],
         "price": "moderate",
@@ -272,7 +272,7 @@ RESTAURANTS = [
         "map_link": "https://maps.app.goo.gl/c2NdA6iiY9ivbYjy5"
     },
     {
-        "name": "Farhan Tomyam Restaurant",
+        "name": "Farhan Tomyam",
         "cuisine": "thai",
         "type": ["tomyam", "thai", "seafood"],
         "price": "budget",
@@ -340,7 +340,7 @@ RESTAURANTS = [
 
     # Fast Food
     {
-        "name": "Uncle Jack @ Seri Iskandar",
+        "name": "Uncle Jack SI",
         "cuisine": "fast food",
         "type": ["fried chicken", "chicken", "local fast food"],
         "price": "expensive",
@@ -352,7 +352,7 @@ RESTAURANTS = [
     },
 
     {
-        "name": "D'Apple Fried Chicken - Seri Iskandar, Perak",
+        "name": "D'Apple Fried Chicken SI",
         "cuisine": "fast food",
         "type": ["fried chicken", "chicken", "local fast food"],
         "price": "expensive",
@@ -364,7 +364,7 @@ RESTAURANTS = [
     },
 
     {
-        "name": "Marrybrown Seri Iskandar",
+        "name": "Marrybrown SI",
         "cuisine": "fast food",
         "type": ["fried chicken", "burger", "rice"],
         "price": "moderate",
@@ -376,7 +376,7 @@ RESTAURANTS = [
     },
 
     {
-        "name": "Hafiz Fried Chicken Seri Iskandar",
+        "name": "Hafiz Fried Chicken SI",
         "cuisine": "fast food",
         "type": ["fried chicken", "chicken", "budget food"],
         "price": "expensive",
@@ -388,7 +388,7 @@ RESTAURANTS = [
     },
 
     {
-        "name": "A&W Seri Iskandar",
+        "name": "A&W SI",
         "cuisine": "fast food",
         "type": ["burger", "fast food", "chicken", "root beer"],
         "price": "expensive",
@@ -400,7 +400,7 @@ RESTAURANTS = [
     },
 
     {
-        "name": "McDonald's Seri Iskandar DT",
+        "name": "McDonald's SI",
         "cuisine": "fast food",
         "type": ["burger", "fried chicken", "breakfast", "drive thru"],
         "price": "expensive",
@@ -412,7 +412,7 @@ RESTAURANTS = [
     },
 
     {
-        "name": "KFC Seri Iskandar Drive Thru",
+        "name": "KFC SI",
         "cuisine": "fast food",
         "type": ["fried chicken", "chicken", "drive thru"],
         "price": "expensive",
@@ -424,7 +424,7 @@ RESTAURANTS = [
     },
 
     {
-        "name": "Subway Seri Iskandar",
+        "name": "Subway SI",
         "cuisine": "fast food",
         "type": ["sandwich", "healthy", "fast food"],
         "price": "moderate",
@@ -436,7 +436,7 @@ RESTAURANTS = [
     },
 
     {
-        "name": "Domino's Seri Iskandar",
+        "name": "Domino's SI",
         "cuisine": "fast food",
         "type": ["pizza", "delivery", "fast food"],
         "price": "expensive",
@@ -448,7 +448,7 @@ RESTAURANTS = [
     },
 
     {
-        "name": "Pizza Hut Delivery Sri Iskandar",
+        "name": "Pizza Hut SI",
         "cuisine": "fast food",
         "type": ["pizza", "delivery", "pasta"],
         "price": "expensive",
