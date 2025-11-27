@@ -931,7 +931,7 @@ def spinning_wheel(restaurants):
     </head>
     <body>
 
-    <canvas id="wheel" width="350" height="350"></canvas>
+    <canvas id="wheel" width="380" height="380"></canvas>
     <div style="text-align:center">
         <button onclick="spin()">🎡 Spin the Wheel</button>
         <p id="result" style="color:white;font-size:18px;margin-top:10px;"></p>
