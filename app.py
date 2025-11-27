@@ -755,12 +755,12 @@ st.markdown("""
         text-align: center;
         color: #e94560 !important;
         font-size: 1.1rem !important;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
     }
     
     /* Chat messages with blur effect */
     .stChatMessage {
-        background-color: rgba(255,255,255,0.9) !important;
+        background-color: rgba(255,255,255,0.1) !important;
         border-radius: 15px;
         padding: 10px;
         margin: 5px 0;
