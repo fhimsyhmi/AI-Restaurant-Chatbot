@@ -840,9 +840,31 @@ for message in st.session_state.messages:
         st.markdown(message["content"], unsafe_allow_html=True)
 
 if prompt := st.chat_input("🔍 Ask me about restaurants..."):
+    import time
+    
+    # Save and display user message
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
+    
+    # Show typing animation
+    with st.chat_message("assistant"):
+        # Create placeholder for animation
+        message_placeholder = st.empty()
+        
+        # Animate typing
+        for i in range(3):
+            message_placeholder.markdown("💬 Typing" + "." * (i + 1))
+            time.sleep(0.5)  # 0.5 seconds between each dot
+        
+        # Generate actual response
+        response = generate_response(prompt)
+        
+        # Replace animation with real response
+        message_placeholder.markdown(response, unsafe_allow_html=True)
+    
+    # Save to history
+    st.session_state.messages.append({"role": "assistant", "content": response})
     
     response = generate_response(prompt)
     st.session_state.messages.append({"role": "assistant", "content": response})
