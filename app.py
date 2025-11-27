@@ -822,8 +822,15 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.title("🍽️ Seri Iskandar Foodie")
-st.caption("✨ Your AI assistant for finding great food in Seri Iskandar! ✨")
+st.title("🍽️ Seri Iskandar Restaurant Bot")
+
+# Custom color
+st.markdown(
+    """<p style='text-align: center; color: #ffd700 !important; font-size: 1.1rem; margin-top: -10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.9);'>
+    ✨ Your AI assistant for finding great food in Seri Iskandar! ✨
+    </p>""",
+    unsafe_allow_html=True
+)
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
