@@ -1,10 +1,6 @@
 # Import the Streamlit library
 import streamlit as st
 
-# Import json spin the wheel
-import streamlit.components.v1 as components
-import json
-
 # RESTAURANT DATABASE
 # main data source, restaurant information
 RESTAURANTS = [
