@@ -694,12 +694,12 @@ Just ask naturally and I'll recommend the best spots!
     #SPINNING WHEEL SECTION
     def spinning_wheel(restaurants):
     
-    def shorten_name(name):
-        name = name.replace("Restoran", "").replace("Kedai Makan", "")
-        name = name.replace("Cafe", "").strip()
-        if len(name) > 20:
-            name = name[:17] + "..."
-        return name
+      def shorten_name(name):
+         name = name.replace("Restoran", "").replace("Kedai Makan", "")
+         name = name.replace("Cafe", "").strip()
+         if len(name) > 20:
+             name = name[:17] + "..."
+         return name
     
     display_names = [shorten_name(r["name"]) for r in restaurants]
     full_names = [r["name"] for r in restaurants]
