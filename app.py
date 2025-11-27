@@ -464,10 +464,10 @@ RESTAURANTS = [
 
 #maps based on category
 CUISINE_KEYWORDS = {
-    "malay": ["malay", "melayu", "local", "kampung", "traditional"],  # Malay food
+    "malay": ["malay", "melayu", "local", "kampung", "traditional","nasi"],  # Malay food
     "indian": ["indian", "mamak", "india"],  # Indian food
-    "western": ["western", "cafe", "pasta", "burger"],  # Western food
-    "arab": ["arab", "middle eastern", "nasi arab"],  # Arab food
+    "western": ["western", "cafe", "pasta", "burger","spaghetti","chicken chop","lamb chop","fish and chip"],  # Western food
+    "arab": ["arab", "middle eastern", "nasi arab","shawarma"],  # Arab food
     "thai": ["thai", "tomyam", "tom yam", "ala thai"], # Thai Food
     "fast food" : [ "fast food", "burger", "fried chicken", "kfc", "mcd", "mcdonald", "pizza", "dominos", "subway", "marrybrown"]
 }
