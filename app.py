@@ -1,6 +1,7 @@
-# Import the Streamlit library
+# import Streamlit library
 import streamlit as st
 
+# import Streamlit component
 import streamlit.components.v1 as components
 import json
 
@@ -641,7 +642,7 @@ def generate_response(user_message):
     # greetings
     greetings = ["hi", "hello", "hey", "assalamualaikum", "hai"]
     if any(g in msg_lower for g in greetings):
-        return """Hello! Welcome to the Seri Iskandar Restaurant Recommender!
+        return """Hello! Welcome to the SI Foodie!
 
 I can help you find great places to eat. Just tell me:
 - What cuisine you prefer (Malay, Indian, Western, Arab, Thai, Fast Food)
@@ -893,7 +894,8 @@ with st.sidebar:
     st.code("Western food cafe", language=None)
     
     st.divider() 
-    
+
+# spinning wheel
 def spinning_wheel(restaurants):
     names = [r["name"] for r in restaurants]
 
