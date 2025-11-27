@@ -760,7 +760,7 @@ st.markdown("""
     
     /* Chat messages with blur effect */
     .stChatMessage {
-        background-color: rgba(255,255,255,0.1) !important;
+        background-color: rgba(255,255,255,0.9) !important;
         border-radius: 15px;
         padding: 10px;
         margin: 5px 0;
