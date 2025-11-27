@@ -891,7 +891,52 @@ with st.sidebar:
     st.code("Cheap breakfast spot", language=None)
     st.code("Western food cafe", language=None)
     
+    st.divider() 
+    with st.sidebar:
     st.divider()
+    st.header("🎡 Feeling Indecisive?")
+    st.caption("Let the wheel decide for you!")
+    
+    # Create the spinning wheel
+    spinning_choice = spinning_wheel(RESTAURANTS)
+    
+    # Handle wheel result
+    if spinning_choice:
+        # Find the restaurant by name
+        try:
+            picked = next(r for r in RESTAURANTS if r["name"] == spinning_choice)
+            
+            # Format the result message
+            price_emoji = {"budget": "💰", "moderate": "💰💰", "expensive": "💰💰💰"}
+            stars = "⭐" * int(picked['rating'])
+            
+            result_message = f"""
+🎯 **The Wheel Has Spoken!** 🎯
+
+**{picked['name']}**
+
+{stars} ({picked['rating']})
+🍽️ Cuisine: {picked['cuisine'].title()}
+{price_emoji.get(picked['price'], '💰')} Price: {picked['price'].title()}
+📍 Location: {picked['location']}
+🕐 Hours: {picked['hours']}
+
+📝 {picked['description']}
+
+_Give it a try!_ 🍴
+"""
+            
+            # Add to chat history
+            st.session_state.messages.append({
+                "role": "assistant", 
+                "content": result_message
+            })
+            
+            # Force refresh to show in chat
+            st.rerun()
+            
+        except StopIteration:
+            st.error("Restaurant not found!")
 # Add this import at the top of your app.py (with other imports)
 
 # ... (rest of your code) ...
@@ -1119,48 +1164,3 @@ def spinning_wheel(restaurants):
 # ... (rest of your code) ...
 
 # Add this in the sidebar section (replace your old spinning wheel code)
-with st.sidebar:
-    st.divider()
-    st.header("🎡 Feeling Indecisive?")
-    st.caption("Let the wheel decide for you!")
-    
-    # Create the spinning wheel
-    spinning_choice = spinning_wheel(RESTAURANTS)
-    
-    # Handle wheel result
-    if spinning_choice:
-        # Find the restaurant by name
-        try:
-            picked = next(r for r in RESTAURANTS if r["name"] == spinning_choice)
-            
-            # Format the result message
-            price_emoji = {"budget": "💰", "moderate": "💰💰", "expensive": "💰💰💰"}
-            stars = "⭐" * int(picked['rating'])
-            
-            result_message = f"""
-🎯 **The Wheel Has Spoken!** 🎯
-
-**{picked['name']}**
-
-{stars} ({picked['rating']})
-🍽️ Cuisine: {picked['cuisine'].title()}
-{price_emoji.get(picked['price'], '💰')} Price: {picked['price'].title()}
-📍 Location: {picked['location']}
-🕐 Hours: {picked['hours']}
-
-📝 {picked['description']}
-
-_Give it a try!_ 🍴
-"""
-            
-            # Add to chat history
-            st.session_state.messages.append({
-                "role": "assistant", 
-                "content": result_message
-            })
-            
-            # Force refresh to show in chat
-            st.rerun()
-            
-        except StopIteration:
-            st.error("Restaurant not found!")
