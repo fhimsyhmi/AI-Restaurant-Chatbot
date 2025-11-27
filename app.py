@@ -5,7 +5,6 @@ import streamlit as st
 import streamlit.components.v1 as components
 import json
 
-
 # RESTAURANT DATABASE
 # main data source, restaurant information
 RESTAURANTS = [
