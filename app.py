@@ -791,9 +791,11 @@ st.markdown("""
     }
     
     /* Sidebar with glass effect */
-    section[data-testid="stSidebar"] {
-        background: rgba(15, 52, 96, 0.65) !important;
+     section[data-testid="stSidebar"] {
+        width: 450px !important;  /* ← Change this number */
+        background: rgba(15, 52, 96, 0.85) !important;
         backdrop-filter: blur(15px);
+
     }
     
     section[data-testid="stSidebar"] h1, 
