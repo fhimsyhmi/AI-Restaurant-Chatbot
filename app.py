@@ -931,7 +931,7 @@ def spinning_wheel(restaurants):
     </head>
     <body>
 
-    <canvas id="wheel" width="420" height="420"></canvas>
+    <canvas id="wheel" width="400" height="400"></canvas>
     <div style="text-align:center">
         <button onclick="spin()">🎡 Spin the Wheel</button>
         <p id="result" style="color:white;font-size:12px;margin-top:10px;"></p>
@@ -959,8 +959,8 @@ def spinning_wheel(restaurants):
                 ctx.rotate(i * slice + slice / 2 + angle);
                 ctx.textAlign = "right";
                 ctx.fillStyle = "#fff";
-                ctx.font = "14px Arial";
-                ctx.fillText(item, radius - 10, 5);
+                ctx.font = "12px Arial";
+                ctx.fillText(item, radius - 60, 5);
                 ctx.restore();
             }});
         }}
