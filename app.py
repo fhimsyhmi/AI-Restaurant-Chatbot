@@ -1098,7 +1098,7 @@ with st.sidebar:
     
     st.divider() 
     
- st.header("🎡 Feeling Indecisive?")
+    st.header("🎡 Feeling Indecisive?")
     st.caption("Let the wheel decide for you!")
     
     spinning_choice = spinning_wheel(RESTAURANTS)
