@@ -693,7 +693,7 @@ Just ask naturally and I'll recommend the best spots!
     return response
 #SPINNING WHEEL SECTION
     def spinning_wheel(restaurants):
-    """Create a spinning wheel for restaurant selection"""
+    
     
     def shorten_name(name):
         name = name.replace("Restoran", "").replace("Kedai Makan", "")
