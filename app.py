@@ -1098,40 +1098,4 @@ with st.sidebar:
     
     st.divider() 
     
-    st.header("🎡 Feeling Indecisive?")
-    st.caption("Let the wheel decide for you!")
-    
-    spinning_choice = spinning_wheel(RESTAURANTS)
-    
-    if spinning_choice:
-        try:
-            picked = next(r for r in RESTAURANTS if r["name"] == spinning_choice)
-            
-            price_emoji = {"budget": "💰", "moderate": "💰💰", "expensive": "💰💰💰"}
-            stars = "⭐" * int(picked['rating'])
-            
-            result_message = f"""
-🎯 **The Wheel Has Spoken!** 🎯
-
-**{picked['name']}**
-
-{stars} ({picked['rating']})
-🍽️ Cuisine: {picked['cuisine'].title()}
-{price_emoji.get(picked['price'], '💰')} Price: {picked['price'].title()}
-📍 Location: {picked['location']}
-🕐 Hours: {picked['hours']}
-
-📝 {picked['description']}
-
-_Give it a try!_ 🍴
-"""
-            
-            st.session_state.messages.append({
-                "role": "assistant", 
-                "content": result_message
-            })
-            
-            st.rerun()
-            
-        except StopIteration:
-            st.error("Restaurant not found!")
+ 
