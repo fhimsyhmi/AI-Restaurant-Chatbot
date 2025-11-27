@@ -315,7 +315,7 @@ RESTAURANTS = [
         "map_link": "https://maps.app.goo.gl/7CHsRXie8n24FpCF6"
     },
     {
-        "name": "Farisha Tomyam Kung",
+        "name": "Fariesha Tomyam Kung",
         "cuisine": "thai",
         "type": ["tomyam", "seafood", "thai"],
         "price": "budget",
