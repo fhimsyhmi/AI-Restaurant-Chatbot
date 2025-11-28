@@ -871,7 +871,7 @@ if prompt := st.chat_input("🔍 Ask me about restaurants..."):
     
     # Show typing animation
     with st.chat_message("assistant"):
-    message_placeholder = st.empty()
+       message_placeholder = st.empty()
     
     # Animate typing
     for i in range(3):
