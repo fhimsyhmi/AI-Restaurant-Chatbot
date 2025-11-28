@@ -881,8 +881,6 @@ if prompt := st.chat_input("🔍 Ask me about restaurants..."):
             
        # Build conversation context
             context = enhance_with_context(st.session_state.messages)
-        
-        # Use AI for response (with fallback)
             response = get_ai_recommendation(prompt, context)
         
         # Replace animation with real response
