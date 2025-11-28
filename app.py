@@ -561,7 +561,7 @@ def extract_preferences(message):
     
     # check if user wants late night options
     # Look for words related to late night or 24-hour service
-    if any(word in msg_lower for word in ["late", "night", "midnight", "24", "malam", "lewat"]):
+    if any(word in msg_lower for word in ["late", "night", "midnight", "24 jam", "malam", "lewat"]):
         prefs["late_night"] = True
     
     return prefs  # return the extracted preferences
