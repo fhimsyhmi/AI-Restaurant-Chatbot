@@ -880,10 +880,10 @@ if prompt := st.chat_input("🔍 Ask me about restaurants..."):
             time.sleep(0.5)  # 0.5 seconds between each dot
             
        # Build conversation context
-        context = enhance_with_context(st.session_state.messages)
+            context = enhance_with_context(st.session_state.messages)
         
         # Use AI for response (with fallback)
-        response = get_ai_recommendation(prompt, context)
+            response = get_ai_recommendation(prompt, context)
         
         # Replace animation with real response
         message_placeholder.markdown(response, unsafe_allow_html=True)
