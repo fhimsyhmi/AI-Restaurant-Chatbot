@@ -864,8 +864,6 @@ for message in st.session_state.messages:
 if prompt := st.chat_input("🔍 Ask me about restaurants..."):
 
     import time
-    context = enhance_with_context(st.session_state.messages)
-    response = get_ai_recommendation(prompt, context)
     
     # Save and display user message
     st.session_state.messages.append({"role": "user", "content": prompt})
@@ -880,7 +878,8 @@ if prompt := st.chat_input("🔍 Ask me about restaurants..."):
     for i in range(3):
         message_placeholder.markdown("💬 Typing" + "." * (i + 1))
         time.sleep(0.5)
-    
+     #context = enhance_with_context(st.session_state.messages)
+    response = get_ai_recommendation(prompt, context)
    
     
     # Replace animation with real response
