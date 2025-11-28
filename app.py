@@ -874,16 +874,16 @@ if prompt := st.chat_input("🔍 Ask me about restaurants..."):
        message_placeholder = st.empty()
     
     # Animate typing
-      for i in range(3):
+    for i in range(3):
         message_placeholder.markdown("💬 Typing" + "." * (i + 1))
         time.sleep(0.5)
     
     # ✅ CORRECT - These should be AFTER the loop (same indent as 'for')
-      context = enhance_with_context(st.session_state.messages)
-      response = get_ai_recommendation(prompt, context)
+    context = enhance_with_context(st.session_state.messages)
+    response = get_ai_recommendation(prompt, context)
     
     # Replace animation with real response
-      message_placeholder.markdown(response, unsafe_allow_html=True)
+    message_placeholder.markdown(response, unsafe_allow_html=True)
     
     # Save to history
     st.session_state.messages.append({"role": "assistant", "content": response})
