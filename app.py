@@ -4,6 +4,7 @@ import streamlit as st
 # import Streamlit component
 import streamlit.components.v1 as components
 import json
+import time
 import google.generativeai as genai
 
 # ==================== AI CONFIGURATION ====================
