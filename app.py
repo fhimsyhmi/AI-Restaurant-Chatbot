@@ -863,26 +863,37 @@ for message in st.session_state.messages:
         st.markdown(message["content"], unsafe_allow_html=True)
 
 if prompt := st.chat_input("🔍 Ask me about restaurants..."):
+
+    import time
+    
+    # Save and display user message
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
     
+    # Show typing animation
     with st.chat_message("assistant"):
-        message_placeholder = st.empty()
-        for i in range(4):
-            message_placeholder.markdown(f"💭 Thinking{'.' * i}")
-            time.sleep(0.4)
-        
-        try:
-            context = enhance_with_context(st.session_state.messages)
-            response = get_ai_recommendation(prompt, context)
-        except:
-            response = generate_response(prompt)
-        
-        message_placeholder.markdown(response, unsafe_allow_html=True)
+       message_placeholder = st.empty()
     
+    # Animate typing
+    for i in range(3):
+        message_placeholder.markdown("💬 Typing" + "." * (i + 1))
+        time.sleep(0.5)
+        
+    context = enhance_with_context(st.session_state.messages)
+    response = get_ai_recommendation(prompt, context)
+   
+    
+    # Replace animation with real response
+    message_placeholder.markdown(response, unsafe_allow_html=True)
+    
+    # Save to history
     st.session_state.messages.append({"role": "assistant", "content": response})
-
+    
+    response = generate_response(prompt)
+    st.session_state.messages.append({"role": "assistant", "content": response})
+    with st.chat_message("assistant"):
+        st.markdown(response, unsafe_allow_html=True)
 
 
 with st.sidebar:
