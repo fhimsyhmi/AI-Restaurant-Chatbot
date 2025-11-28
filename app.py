@@ -870,7 +870,7 @@ if prompt := st.chat_input("🔍 Ask me about restaurants..."):
         st.markdown(prompt)
     
     # Show typing animation
-   with st.chat_message("assistant"):
+    with st.chat_message("assistant"):
     message_placeholder = st.empty()
     
     # Animate typing
