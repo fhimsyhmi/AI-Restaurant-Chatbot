@@ -862,6 +862,8 @@ for message in st.session_state.messages:
         st.markdown(message["content"], unsafe_allow_html=True)
 
 if prompt := st.chat_input("🔍 Ask me about restaurants..."):
+    context = enhance_with_context(st.session_state.messages)
+    response = get_ai_recommendation(prompt, context)
     import time
     
     # Save and display user message
