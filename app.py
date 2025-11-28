@@ -4,6 +4,17 @@ import streamlit as st
 # import Streamlit component
 import streamlit.components.v1 as components
 import json
+import google.generativeai as genai
+
+# ==================== AI CONFIGURATION ====================
+# Get API key from Streamlit secrets
+GEMINI_API_KEY = st.secrets.get("GEMINI_API_KEY", "")
+
+if GEMINI_API_KEY:
+    genai.configure(api_key=GEMINI_API_KEY)
+    model = genai.GenerativeModel('gemini-pro')
+else:
+    model = None
 
 # RESTAURANT DATABASE
 # main data source, restaurant information
@@ -867,9 +878,12 @@ if prompt := st.chat_input("🔍 Ask me about restaurants..."):
         for i in range(3):
             message_placeholder.markdown("💬 Typing" + "." * (i + 1))
             time.sleep(0.5)  # 0.5 seconds between each dot
+            
+       # Build conversation context
+        context = enhance_with_context(st.session_state.messages)
         
-        # Generate actual response
-        response = generate_response(prompt)
+        # Use AI for response (with fallback)
+        response = get_ai_recommendation(prompt, context)
         
         # Replace animation with real response
         message_placeholder.markdown(response, unsafe_allow_html=True)
@@ -884,6 +898,16 @@ if prompt := st.chat_input("🔍 Ask me about restaurants..."):
 
 with st.sidebar:
     st.image("https://cdn.aptoide.com/imgs/6/4/5/645d30066e92a19540c170e0fc974ad2_icon.png", width=150)
+    # ========== ADD THIS AI STATUS ==========
+    if model:
+        st.success("✨ AI Mode: Active")
+        st.caption("Powered by Google Gemini")
+    else:
+        st.warning("⚡ Basic Mode")
+        st.caption("Add API key for AI features")
+    
+    st.divider()
+    # ========== END AI STATUS ==========
     st.header("🍛 About")
     st.write("This chatbot helps you find the perfect restaurant in Seri Iskandar, Perak.")
     
